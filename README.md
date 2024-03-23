@@ -12,3 +12,14 @@ Además del tiempo que consume cada batalla, sabemos que al Señor del Fuego no 
 Dadas estas características, se quiere buscar tener el orden de las batallas tales que se logre minimizar la suma ponderada de los tiempos de finalización: ∑​bi​Fi​.
 
 El Señor del Fuego nos pide diseñar un algoritmo que determine aquel orden de las batallas que logre minimizar dicha suma ponderada.
+
+## Consigna
+
+1. Hacer un análisis del problema, y proponer un algoritmo greedy que obtenga la solución óptima al problema planteado: Dados los nn valores de todos los ti​ y bi​, determinar cuál es el orden óptimo para realizar las batallas en el cuál se minimiza ∑​bi​Fi​.
+2. Demostrar que el algoritmo planteado obtiene siempre la solución óptima.
+3. Escribir el algoritmo planteado. Describir y justificar la complejidad de dicho algoritmo. Analizar si (y cómo) afecta la variabilidad de los valores de ti​ y bi​ a los tiempos del algoritmo planteado.
+4. Analizar si (y cómo) afecta la variabilidad de los valores de titi​ y bibi​ a la optimalidad del algoritmo planteado.
+5. Realizar ejemplos de ejecución para encontrar soluciones y corroborar lo encontrado. Adicionalmente, el curso proveerá con algunos casos particulares que deben cumplirse su optimalidad también.
+6. Hacer mediciones de tiempos para corroborar la complejidad teórica indicada. Agregar los casos de prueba necesarios para dicha corroboración. Realizar gráficos correspondientes.
+7. Agregar cualquier conclusión que les parezca relevante.
+
