@@ -23,8 +23,8 @@ def calcular_coeficiente(batallas):
 def main():
     batallas = cargar_archivo(sys.argv[1])
     orden_optimo = get_orden_optimo(batallas)
-    print(orden_optimo)
-    print(calcular_coeficiente(orden_optimo))
+    print("Orden optimo:", orden_optimo)
+    print("Coeficiente:", calcular_coeficiente(orden_optimo))
 
 if __name__ == "__main__":
     main()
