@@ -37,3 +37,31 @@ Luego, llegamos a dos conclusiones:
 - Si obviamos la duración de las batallas, debemos ordenarlas de manera descendiente según la importancia.
 
 Si bien esto nos da un indicio de hacia donde debemos encarar el problema, no es suficiente, pues no podemos simplemente ignorar una parte del problema. Entonces deberíamos buscar una forma que cumpla esta relacion lo mejor posible
+
+# Algoritmo y Complejidad
+A continuacion expondremos el codigo de nuestro algoritmo junto con el respectivo analisis de complejidad. Además analizaremos como afecta la variabilidad de los atributos $b_{i}$ y $t_{i}$ a la ejecucion del algoritmo planteado.
+
+## Implementación
+
+```python
+def ordenarBatallas(batallas):
+    return sorted(batallas, key=lambda batalla: batalla[TIEMPO]/batalla[IMPORTANCIA])
+
+
+def calcular_coeficiente(batallas):
+    ordenarBatallas(batallas)
+    F = 0
+    suma = 0
+    for batalla in batallas:
+        F += batalla[TIEMPO]
+        suma += batalla[IMPORTANCIA]*F
+    return suma
+```
+
+## Analisis Complejidad
+El algoritmo consta de dos partes:
+
+1. Se ordenan las batallas con el criterio planteado. Considerando el uso del sort de python, esto se hace en O(nLogn).
+2. Se iteran las batallas y se realiza la suma ponderada descrita en el problema, tardando O(n).
+
+Luego, la complejidad final queda O(n) + O(nLogn) = O(nLogn).
