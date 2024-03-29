@@ -36,6 +36,6 @@ o
 
 Por ejemplo: `py main.py pruebas_drive\10.txt`
 
-El programa imprimirá por pantalla el listado completo de batallas ordenadas de forma óptima y el coeficiente total obtenido.
+El programa imprimirá por pantalla el listado completo de batallas ordenadas de forma óptima y el coeficiente obtenido.
 
 Aclaración: el path al dataset debe ser el relativo desde el root del repositorio.

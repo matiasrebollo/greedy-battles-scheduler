@@ -1,15 +1,15 @@
 # Objetivo
 
-El objetivo de nuestro trabajo es idear un algoritmo para el Señor del Fuego que determine el orden óptimo en el que debe llevar a cabo una lista de batallas. Dicho algoritmo debe implementarse de forma Greedy. Además se brindara un análisis completo del problema y del algoritmo.
+El objetivo del presente trabajo es idear un algoritmo para el Señor del Fuego que logre determinar el orden óptimo en el que debe llevar a cabo un conjunto de batallas. Dicho algoritmo debe implementarse de forma Greedy. Además, se brindará un análisis completo del problema y del algoritmo en cuestión.
 
 ## Análisis del Problema
 
-Se nos pide ordenar un total de $n$ batallas,  cada batalla $B_{i}$ consta de dos atributos:
+Se nos pide ordenar un total de $n$ batallas, donde cada batalla $B_{i}$ consta de dos atributos:
 - $b_{i}$ : la importancia de la batalla. 
 - $t_{i}$ : el tiempo necesario para ganar la batalla. 
 
-Además se define la felicidad producida por la victoria ${j}$ como $F_{j} = F_{i} + t_{j}$ , donde $F_{i}$ corresponde a la batalla anterior ($F_{j} = t_{j}$ para la primera batalla).
-Se define como el orden óptimo de batallas, aquel orden tal que minimiza la siguiente suma:
+Además, se define la felicidad producida por la victoria ${j}$ como $F_{j} = F_{i} + t_{j}$ , donde $F_{i}$ corresponde a la batalla anterior ($F_{j} = t_{j}$ para la primera batalla).
+Se define como el orden óptimo de batallas a aquel orden tal que minimiza la siguiente suma:
 
 $$
  \sum_{i=1}^{n}b_{i}\cdot F_{i}
@@ -22,7 +22,7 @@ $$
 =b_{1} \cdot t_{1} + b_{2}\cdot \left(t_{1} + t_{2}\right) + b_{3}\cdot \left(t_{1} + t_{2} + t_{3}\right) + \cdots + b_{n} \cdot \sum_{i=1}^{n}t_{i}
 $$
 
-En este punto se puede ver que el termino que acompaña a cada $b_{i}$ va *creciendo*, siendo $b_{n}$ (i.e. la importancia de la ultima batalla), el termino mas afectado. 
+En este punto se puede ver que el término que acompaña a cada $b_{i}$ va *creciendo*, siendo $b_{n}$ (i.e. la importancia de la última batalla), el término mas afectado. 
 Ahora, sigamos desarrollando la suma, en esta ocasión distribuyendo $b_{i}$:
 
 $$
@@ -33,13 +33,13 @@ $$
 En este caso notamos que los términos que acompañan a cada $t_{i}$ van *disminuyendo*, por ende el $t_{i}$ más afectado será el $t_{1}$ (i.e. el tiempo necesario de la primer batalla). 
 
 Luego, llegamos a dos conclusiones:
-- Si obviamos la importancia de las batallas, estas se deben ordenar en forma ascendiente según el tiempo de duración. 
-- Si obviamos la duración de las batallas, debemos ordenarlas de manera descendiente según la importancia.
+- Si obviamos la importancia de las batallas, estas se deben ordenar en forma ascendiente según el tiempo de duración ("las más cortas primero"). 
+- Si obviamos la duración de las batallas, debemos ordenarlas de manera descendiente según la importancia ("las más importantes primero").
 
-Si bien esto nos da un indicio de hacia donde debemos encarar el problema, no es suficiente, pues no podemos simplemente ignorar una parte del problema. Entonces deberíamos buscar una forma que cumpla esta relacion lo mejor posible
+Si bien esto nos da un indicio de hacia donde debemos encarar el problema, no es suficiente, pues no podemos simplemente ignorar una parte entera del mismo. Entonces, deberíamos buscar una forma que cumpla esta relación lo mejor posible.
 
 # Algoritmo y Complejidad
-A continuacion expondremos el codigo de nuestro algoritmo junto con el respectivo analisis de complejidad. Además analizaremos como afecta la variabilidad de los atributos $b_{i}$ y $t_{i}$ a la ejecucion del algoritmo planteado.
+A continuación expondremos el código de nuestro algoritmo junto con el respectivo análisis de complejidad. Además, analizaremos cómo afecta la variabilidad de los atributos $b_{i}$ y $t_{i}$ a la ejecución del algoritmo planteado.
 
 ## Implementación
 
@@ -61,7 +61,7 @@ def calcular_coeficiente(batallas):
 ## Analisis Complejidad
 El algoritmo consta de dos partes:
 
-1. Se ordenan las batallas con el criterio planteado. Considerando el uso del sort de python, esto se hace en O(nLogn).
-2. Se iteran las batallas y se realiza la suma ponderada descrita en el problema, tardando O(n).
+1. Se ordenan las batallas con el criterio planteado. Considerando el uso del sort de Python, esto se hace en O($nlogn$).
+2. Se iteran las batallas y se realiza la suma ponderada descrita en el problema, tardando O($n$).
 
-Luego, la complejidad final queda O(n) + O(nLogn) = O(nLogn).
+Luego, la complejidad total queda O($n$) + O($nlogn$) = O($nlogn$).
