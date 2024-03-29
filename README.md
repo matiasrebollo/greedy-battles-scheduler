@@ -11,18 +11,21 @@ La felicidad que produce saber que se logró una victoria depende del momento en
 
 Además del tiempo que consume cada batalla, sabemos que al Señor del Fuego no le da lo mismo el orden en el que se realizan, porque comunicar la victoria a su nación en diferentes batallas genera menos impacto si pasa mucho tiempo. Además, cada batalla tiene una importancia diferente. Vamos a definir que tenemos un peso bi​ que nos define cuán importante es una batalla.
 
-Dadas estas características, se quiere buscar tener el orden de las batallas tales que se logre minimizar la suma ponderada de los tiempos de finalización: $\sum_{i=1}^{n}​b_i​F_i$​.
+Dadas estas características, se quiere buscar tener el orden de las batallas tales que se logre minimizar la suma ponderada de los tiempos de finalización: $∑​​b_i​F_i$​.
 
 El Señor del Fuego nos pide diseñar un algoritmo que determine aquel orden de las batallas que logre minimizar dicha suma ponderada.
 
 
 ## Consigna
 
-1. Hacer un análisis del problema, y proponer un algoritmo greedy que obtenga la solución óptima al problema planteado: Dados los $n$ valores de todos los $t_i$​ y $b_i$​, determinar cuál es el orden óptimo para realizar las batallas en el cuál se minimiza $\sum_{i=1}^{n}​b_i​F_i$​.
+1. Hacer un análisis del problema, y proponer un algoritmo greedy que obtenga la solución óptima al problema planteado: Dados los $n$ valores de todos los $t_i$​ y $b_i$​, determinar cuál es el orden óptimo para realizar las batallas en el cuál se minimiza $∑​​b_i​F_i$​.
 2. Demostrar que el algoritmo planteado obtiene siempre la solución óptima.
 3. Escribir el algoritmo planteado. Describir y justificar la complejidad de dicho algoritmo. Analizar si (y cómo) afecta la variabilidad de los valores de $t_i$​ y $b_i$​ a los tiempos del algoritmo planteado.
 4. Analizar si (y cómo) afecta la variabilidad de los valores de $t_i$​ y $b_i$​ a la optimalidad del algoritmo planteado.
 5. Realizar ejemplos de ejecución para encontrar soluciones y corroborar lo encontrado. Adicionalmente, el curso proveerá con algunos casos particulares que deben cumplirse su optimalidad también.
 6. Hacer mediciones de tiempos para corroborar la complejidad teórica indicada. Agregar los casos de prueba necesarios para dicha corroboración. Realizar gráficos correspondientes.
 7. Agregar cualquier conclusión que les parezca relevante.
+
+
+## Ejecución
 
