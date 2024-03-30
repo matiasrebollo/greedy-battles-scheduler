@@ -37,6 +37,14 @@ Luego, llegamos a dos conclusiones:
 - Si obviamos la duración de las batallas, debemos ordenarlas de manera descendiente según la importancia ("las más importantes primero").
 
 Si bien esto nos da un indicio de hacia donde debemos encarar el problema, no es suficiente, pues no podemos simplemente ignorar una parte entera del mismo. Entonces, deberíamos buscar una forma que cumpla esta relación lo mejor posible.
+Luego, proponemos el siguiente algoritmo:
+
+1. Ordenamos las batallas de menor a mayor según la relación $t_{i}/b_{i}$. Este será el orden óptimo en el que se deberán llevar a cabo las batallas.
+2. Calculamos el *coeficiente de impacto*, para eso iteramos sobre las batallas y aplicamos una *regla sencilla*:  por cada batalla calcularemos el termino $b_{i}\cdot F_{i}$, y los iremos acumulando hasta terminar la iteración.
+
+### Demostración
+
+(idea: usar dem por inversiones)
 
 # Algoritmo y Complejidad
 A continuación expondremos el código de nuestro algoritmo junto con el respectivo análisis de complejidad. Además, analizaremos cómo afecta la variabilidad de los atributos $b_{i}$ y $t_{i}$ a la ejecución del algoritmo planteado.
@@ -61,7 +69,7 @@ def calcular_coeficiente(batallas):
 ## Analisis Complejidad
 El algoritmo consta de dos partes:
 
-1. Se ordenan las batallas con el criterio planteado. Considerando el uso del sort de Python, esto se hace en O($nlogn$).
-2. Se iteran las batallas y se realiza la suma ponderada descrita en el problema, tardando O($n$).
+1. Se ordenan las batallas con el criterio planteado. Considerando el uso del sort de Python, esto se hace en $\mathcal{O}(n\log{}n)$.
+2. Se iteran las batallas y se realiza la suma ponderada descrita en el problema, tardando $\mathcal{O}(n)$.
 
-Luego, la complejidad total queda O($n$) + O($nlogn$) = O($nlogn$).
+Luego, la complejidad total queda $\mathcal{O}(n\log{}n) + \mathcal{O}(n) = \mathcal{O}(n\log{}n)$.
