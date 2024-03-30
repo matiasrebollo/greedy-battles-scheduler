@@ -50,11 +50,11 @@ def ordenarBatallas(batallas):
 
 def calcular_coeficiente(batallas):
     ordenarBatallas(batallas)
-    F = 0
+    felicidad = 0
     suma = 0
     for batalla in batallas:
-        F += batalla[TIEMPO]
-        suma += batalla[IMPORTANCIA]*F
+        felicidad += batalla[TIEMPO]
+        suma += batalla[IMPORTANCIA]*felicidad
     return suma
 ```
 
