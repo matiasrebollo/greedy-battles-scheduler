@@ -5,8 +5,8 @@ El objetivo del presente trabajo es idear un algoritmo para el Señor del Fuego 
 ## Análisis del Problema
 
 Se nos pide ordenar un total de $n$ batallas, donde cada batalla $B_{i}$ consta de dos atributos:
-- $b_{i}$ : la importancia de la batalla. 
-- $t_{i}$ : el tiempo necesario para ganar la batalla. 
+- $b_{i}$ : la importancia de la batalla, es un numero real no negativo.
+- $t_{i}$ : el tiempo necesario para ganar la batalla, un real positivo.
 
 Además, se define la felicidad producida por la victoria ${j}$ como $F_{j} = F_{i} + t_{j}$ , donde $F_{i}$ corresponde a la batalla anterior ($F_{j} = t_{j}$ para la primera batalla).
 Se define como el orden óptimo de batallas a aquel orden tal que minimiza la siguiente suma:
@@ -39,7 +39,7 @@ Luego, llegamos a dos conclusiones:
 Si bien esto nos da un indicio de hacia donde debemos encarar el problema, no es suficiente, pues no podemos simplemente ignorar una parte entera del mismo. Entonces, deberíamos buscar una forma que cumpla esta relación lo mejor posible.
 Luego, proponemos el siguiente algoritmo:
 
-1. Ordenamos las batallas de menor a mayor según la relación $t_{i}/b_{i}$. Este será el orden óptimo en el que se deberán llevar a cabo las batallas.
+1. Ordenamos las batallas de mayor a menor según la relación $b_{i}/t_{i}$. Este será el orden óptimo en el que se deberán llevar a cabo las batallas.
 2. Calculamos el *coeficiente de impacto*, para eso iteramos sobre las batallas y aplicamos una *regla sencilla*:  por cada batalla calcularemos el termino $b_{i}\cdot F_{i}$, y los iremos acumulando hasta terminar la iteración.
 
 ### Demostración mediante inversiones
@@ -110,7 +110,7 @@ A continuación expondremos el código de nuestro algoritmo junto con el respect
 
 ```python
 def ordenarBatallas(batallas):
-    return sorted(batallas, key=lambda batalla: batalla[TIEMPO]/batalla[IMPORTANCIA])
+    return sorted(batallas, reverse=True, key=lambda batalla: batalla[IMPORTANCIA]/batalla[TIEMPO])
 
 
 def calcular_coeficiente(batallas):
