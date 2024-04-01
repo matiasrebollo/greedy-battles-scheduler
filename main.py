@@ -10,14 +10,14 @@ def cargar_archivo(archivo):
     return batallas
 
 def get_orden_optimo(batallas):
-    return sorted(batallas, key=lambda batalla: batalla[0]/batalla[1])
+    return sorted(batallas, key=lambda batalla: batalla[IMPORTANCIA]/batalla[TIEMPO])
 
 def calcular_coeficiente(batallas):
     felicidad = 0
     suma = 0
     for batalla in batallas:
-        felicidad += batalla[0]
-        suma += batalla[1]*felicidad
+        felicidad += batalla[TIEMPO]
+        suma += batalla[IMPORTANCIA]*felicidad
     return suma
 
 def main():
