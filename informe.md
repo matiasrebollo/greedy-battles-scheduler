@@ -42,7 +42,64 @@ Luego, proponemos el siguiente algoritmo:
 1. Ordenamos las batallas de menor a mayor según la relación $t_{i}/b_{i}$. Este será el orden óptimo en el que se deberán llevar a cabo las batallas.
 2. Calculamos el *coeficiente de impacto*, para eso iteramos sobre las batallas y aplicamos una *regla sencilla*:  por cada batalla calcularemos el termino $b_{i}\cdot F_{i}$, y los iremos acumulando hasta terminar la iteración.
 
-### Demostración
+### Demostración mediante inversiones
+
+Sea $a_{i} = t_{i}/b_{i}$. Consideremos la solucion A obtenida mediante nuestro algoritmo, diremos que una solucion A' tiene una *inversion*, si hay un par de batallas $i$ y $j$ tal que $i$ se realiza antes que $j$, pero $a_{i} > a_{j}$. Por su funcionamiento, el A producido por nuestro algoritmo no tiene inversiones.
+Luego, para demostrar que nuestro algoritmo es óptimo, debemos demostrar lo siguiente:
+1. Dos soluciones distintas sin inversiones tienen el mismo coeficiente de impacto.
+2. Existe una solucion optima sin inversiones.
+
+#### *Dos soluciones distintas sin inversiones tienen el mismo coeficiente de impacto.*
+
+Si dos soluciones ofrecen un orden de batalla distinto, y no tienen inversiones, entonces solo puede diferir el orden en el que se realizan batallas de igual $a_{i}$.
+
+$$
+S = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{i}\cdot F_{i} + b_{j}\cdot F_{j} + \cdots = \cdots + b_{i}\left(F_{k} + t_{i}\right) + b_{j}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{j}\cdot F_{k} + b_{j}\cdot t_{i} + b_{j}\cdot t_{j} + \cdots
+$$
+
+$$
+S\' = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{j}\cdot f_{j} + b_{i}\cdot f_{i} + \cdots = \cdots + b_{j}\left(F_{k} + t_{j}\right) + b_{i}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{j}\cdot F_{k} + b_{j}\cdot t_{j} + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{i}\cdot t_{j} + \cdots
+$$
+
+$$
+S - S' = b_{j}t_{i} - b_{i}t_{j}
+$$
+
+Como S y S' no tienen inversiones, $a = t_{i}/b_{i} = t_{j}/b_{j}$. Además reemplazamos $b_{i}$ por $t_{i}a$ y $b_{j}$ por $t_{j}a$. Volvemos a escribir la diferencia:
+
+$$
+S - S' = t_{j}at_{i} - t_{i}at_{j} = 0 \rightarrow S = S'
+$$
+
+#### *Existe una solución óptima sin inversiones*
+
+Consideremos la solucion $O$. Diremos que $O$ tiene al menos una inversión, ergo existe un par de batallas consecutivas $i$ y $j$ tal que $i$ precede a $j$ pero $a_{i} > a_{j}$. Si invertimos el orden de $i$ y $j$, obtenemos una nueva solución con una inversión menos. Luego debemos demostrar que esta nueva solución tiene un coeficiente de impacto no mayor al coeficiente de impacto de $O$.
+
+$$
+S = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{i}\cdot F_{i} + b_{j}\cdot F_{j} + \cdots = \cdots + b_{i}\left(F_{k} + t_{i}\right) + b_{j}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{j}\cdot F_{k} + b_{j}\cdot t_{i} + b_{j}\cdot t_{j} + \cdots
+$$
+
+El desarrollo de la diferencia se realiza de manera similar al item anterior
+
+$$
+S\' = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{j}\cdot f_{j} + b_{i}\cdot f_{i} + \cdots = \cdots + b_{j}\left(F_{k} + t_{j}\right) + b_{i}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{j}\cdot F_{k} + b_{j}\cdot t_{j} + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{i}\cdot t_{j} + \cdots
+$$
+
+$$
+S - S' = b_{j}t_{i} - b_{i}t_{j}
+$$
+
+Reemplazamos $b_{i}$ por $t_{i}a_{i}$ y $b_{j}$ por $t_{j}a_{j}$. Luego:
+
+$$
+S - S' = t_{j}a_{j}t_{i} - t_{i}a_{i}t_{j}
+$$
+
+$$
+a_{j} < a_{i} \rightarrow t_{j}a_{j} < a_{i}t_{j} \rightarrow t_{j}a_{j}t_{i} < t_{i}a_{i}t_{j} \rightarrow S - S' > 0
+$$
+
+**(CORREGIRRRRRRR b_{i} = t_{i}/a_{i})**
 
 (idea: usar dem por inversiones)
 
