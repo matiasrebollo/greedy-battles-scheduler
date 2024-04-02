@@ -130,3 +130,7 @@ El algoritmo consta de dos partes:
 2. Se iteran las batallas y se realiza la suma ponderada descrita en el problema, tardando $\mathcal{O}(n)$.
 
 Luego, la complejidad total queda $\mathcal{O}(n\log{}n) + \mathcal{O}(n) = \mathcal{O}(n\log{}n)$.
+
+# Mediciones
+
+![grafico complejidad](img/grafico_complejidad.png "Grafico complejidad")
