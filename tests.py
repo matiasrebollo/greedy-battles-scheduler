@@ -50,6 +50,12 @@ class Test(unittest.TestCase):
         orden_optimo = get_orden_optimo(batallas)  
         self.assertEqual(calcular_coeficiente(orden_optimo), 167000)
 
+     def test_importancia_decimal1(self):
+        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Importancia decimal1.txt')
+        batallas = cargar_archivo(path_archivo)
+        orden_optimo = get_orden_optimo(batallas)  
+        self.assertEqual(calcular_coeficiente(orden_optimo), 128.89)
+
        
 if __name__ == '__main__':
     unittest.main()
