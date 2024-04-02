@@ -44,6 +44,12 @@ class Test(unittest.TestCase):
         orden_optimo = get_orden_optimo(batallas)  
         self.assertEqual(calcular_coeficiente(orden_optimo), 728684685661017)
 
+    def test_mismo_tiempo(self):
+        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Mismo tiempo.txt')
+        batallas = cargar_archivo(path_archivo)
+        orden_optimo = get_orden_optimo(batallas)  
+        self.assertEqual(calcular_coeficiente(orden_optimo), )
+
        
 if __name__ == '__main__':
     unittest.main()
