@@ -104,7 +104,7 @@ Por lo tanto, el intercambio no aumento el coeficiente de impacto.
 Finalmente, queda demostrado que la solución A producida por nuestro algoritmo produce un coeficiente de impacto óptimo.
 
 # Algoritmo y Complejidad
-A continuación expondremos el código de nuestro algoritmo junto con el respectivo análisis de complejidad. Además, analizaremos cómo afecta la variabilidad de los atributos $b_{i}$ y $t_{i}$ a la ejecución del algoritmo planteado.
+A continuación expondremos el código de nuestro algoritmo junto con el respectivo análisis de complejidad. Además, analizaremos cómo afecta la variabilidad de los atributos $b_{i}$ y $t_{i}$ a la ejecución del algoritmo planteado. Tambien se analizara como afecta la variabilidad de los valores de $b_{i}$ y $t_{i}$ a nuestro algoritmo.
 
 ## Implementación
 
@@ -130,6 +130,44 @@ El algoritmo consta de dos partes:
 2. Se iteran las batallas y se realiza la suma ponderada descrita en el problema, tardando $\mathcal{O}(n)$.
 
 Luego, la complejidad total queda $\mathcal{O}(n\log{}n) + \mathcal{O}(n) = \mathcal{O}(n\log{}n)$.
+
+## Analisis variabilidad de valores
+
+#### Manteniendo $b_{i}$ constante
+
+Si $b_{i} = b\space \forall i \in batallas$, podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera:
+
+$$
+\frac{b_{i}}{t_{i}} = \frac{b}{t_{i}}
+$$
+
+Sean $j$ y $k$ dos batallas tal que $t_{j} < t_{k}$("la batalla $j$ es mas corta que la batalla $k$"), entonces se observa lo siguiente:
+
+$$
+t_{j} < t_{k} \implies \frac{1}{t_{j}} > \frac{1}{t_{k}} \implies \frac{b}{t_{j}} > \frac{b}{t_{k}}
+$$
+
+Luego, al ordenar segun nuestro criterio, la batalla $j$ irá antes que la batalla $k$, y en general, tal como se habia observado en la seccion anterior, las batallas mas cortas se pelearan antes.
+
+#### Manteniendo $t_{i}$ constante
+
+Si $t_{i} = t\space \forall i \in batallas$, podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera:
+
+$$
+\frac{b_{i}}{t_{i}} = \frac{b_{i}}{t}
+$$
+
+Sean $j$ y $k$ dos batallas tal que $b_{j} > b_{k}$("la batalla $j$ es mas importante que la batalla $k$"), entonces se observa lo siguiente:
+
+$$
+b_{j} > b_{k} \implies \frac{b_{j}}{t} > \frac{b_{k}}{t}
+$$
+
+Por ende, segun nuestro algoritmo, se peleará la batalla $j$ antes que la $k$, y en general,las batallas más importantes se pelearan antes.
+
+#### Misma relacion $b_{i}/t_{i}$ para toda batalla $i$
+
+Para el caso donde $b_{i}/t_{i} = k, k \in \mathbb{R}^{+}$, no importa como se ordene, pues tal como se demostro en la justificacion del algoritmo, al no tener inversiones, el coeficiente siempre sera el mismo. Además estamos ante el mejor caso posible, pues el ordenamiento deja al arreglo tal cual lo recibio, por lo que el algoritmo termina tardando  $\mathcal{O}(n)$.
 
 # Mediciones
 
