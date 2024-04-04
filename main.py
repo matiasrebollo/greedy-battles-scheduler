@@ -6,7 +6,7 @@ IMPORTANCIA = 1
 def cargar_archivo(archivo):
     with open(archivo) as f:
         r = csv.DictReader(f)
-        batallas = [tuple(int(x) for x in linea.values()) for linea in r]
+        batallas = [tuple(float(x) for x in linea.values()) for linea in r]
     return batallas
 
 def get_orden_optimo(batallas):
