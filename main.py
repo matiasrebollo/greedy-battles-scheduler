@@ -1,5 +1,5 @@
-import sys
-import csv
+import sys, csv
+
 TIEMPO = 0
 IMPORTANCIA = 1
 

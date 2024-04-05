@@ -15,9 +15,9 @@ for n in tamanos_datos:
     tiempo_ms = (fin - start)*1000
     tiempos_ejecucion.append(tiempo_ms)
 
-plt.title("Tiempo de ejecucion en fincion al tamaño del arreglo")
-plt.xlabel("tamaño del arreglo")
-plt.ylabel("tiempo consumido(en ms)")
+plt.title("Tiempo de ejecución en función del tamaño del arreglo")
+plt.xlabel("cantidad de batallas")
+plt.ylabel("tiempo consumido [ms]")
 plt.plot(tamanos_datos, tiempos_ejecucion)
-plt.savefig("grafico complejidad.png")
+plt.savefig("img/grafico_complejidad.png")
 plt.show()

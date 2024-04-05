@@ -99,7 +99,7 @@ $$
 a_{j} > a_{i} \rightarrow t_{j}a_{j} > a_{i}t_{j} \rightarrow t_{j}a_{j}t_{i} > t_{i}a_{i}t_{j} \rightarrow S - S' > 0 \rightarrow S > S'
 $$
 
-Por lo tanto, el intercambio no aumento el coeficiente de impacto.
+Por lo tanto, el intercambio no aumentó el coeficiente de impacto.
 
 Finalmente, queda demostrado que la solución A producida por nuestro algoritmo produce un coeficiente de impacto óptimo.
 
@@ -109,12 +109,12 @@ A continuación expondremos el código de nuestro algoritmo junto con el respect
 ## Implementación
 
 ```python
-def ordenarBatallas(batallas):
+# Código en main.py
+
+def get_orden_optimo(batallas):
     return sorted(batallas, reverse=True, key=lambda batalla: batalla[IMPORTANCIA]/batalla[TIEMPO])
 
-
 def calcular_coeficiente(batallas):
-    ordenarBatallas(batallas)
     felicidad = 0
     suma = 0
     for batalla in batallas:
@@ -123,49 +123,52 @@ def calcular_coeficiente(batallas):
     return suma
 ```
 
-## Analisis Complejidad
-El algoritmo consta de dos partes:
+## Análisis Complejidad
+
+Inicialmente se lleva acabo un preprocesamiento que consta de cargar el dataset (archivo .txt) en una lista de tuplas, lo cual se realiza en tiempo lineal $\mathcal{O}(n)$.
+
+Luego, el algoritmo en sí consta de dos partes:
 
 1. Se ordenan las batallas con el criterio planteado. Considerando el uso del sort de Python, esto se hace en $\mathcal{O}(n\log{}n)$.
 2. Se iteran las batallas y se realiza la suma ponderada descrita en el problema, tardando $\mathcal{O}(n)$.
 
-Luego, la complejidad total queda $\mathcal{O}(n\log{}n) + \mathcal{O}(n) = \mathcal{O}(n\log{}n)$.
+Por lo tanto, la complejidad total resulta en $\mathcal{O}(n\log{}n) + \mathcal{O}(n) = \mathcal{O}(n\log{}n)$.
 
-## Analisis variabilidad de valores
+## Análisis variabilidad de valores
 
 #### Manteniendo $b_{i}$ constante
 
-Si $b_{i} = b\space \forall i \in batallas$, podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera:
+Si $b_{i} = b\space \forall i \in batallas$, podemos escribir la relación $b_{i}/t_{i}$ de la siguiente manera:
 
 $$
 \frac{b_{i}}{t_{i}} = \frac{b}{t_{i}}
 $$
 
-Sean $j$ y $k$ dos batallas tal que $t_{j} < t_{k}$("la batalla $j$ es mas corta que la batalla $k$"), entonces se observa lo siguiente:
+Sean $j$ y $k$ dos batallas tal que $t_{j} < t_{k}$("la batalla $j$ es más corta que la batalla $k$"), entonces se observa lo siguiente:
 
 $$
 t_{j} < t_{k} \implies \frac{1}{t_{j}} > \frac{1}{t_{k}} \implies \frac{b}{t_{j}} > \frac{b}{t_{k}}
 $$
 
-Luego, al ordenar segun nuestro criterio, la batalla $j$ irá antes que la batalla $k$, y en general, tal como se habia observado en la seccion anterior, las batallas mas cortas se pelearan antes.
+Luego, al ordenar según nuestro criterio, la batalla $j$ irá antes que la batalla $k$, y en general, tal como se había observado en la seccion anterior, las batallas más cortas se pelearán antes.
 
 #### Manteniendo $t_{i}$ constante
 
-Si $t_{i} = t\space \forall i \in batallas$, podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera:
+Si $t_{i} = t\space \forall i \in batallas$, podemos escribir la relación $b_{i}/t_{i}$ de la siguiente manera:
 
 $$
 \frac{b_{i}}{t_{i}} = \frac{b_{i}}{t}
 $$
 
-Sean $j$ y $k$ dos batallas tal que $b_{j} > b_{k}$("la batalla $j$ es mas importante que la batalla $k$"), entonces se observa lo siguiente:
+Sean $j$ y $k$ dos batallas tal que $b_{j} > b_{k}$ ("la batalla $j$ es más importante que la batalla $k$"), entonces se observa lo siguiente:
 
 $$
 b_{j} > b_{k} \implies \frac{b_{j}}{t} > \frac{b_{k}}{t}
 $$
 
-Por ende, segun nuestro algoritmo, se peleará la batalla $j$ antes que la $k$, y en general,las batallas más importantes se pelearan antes.
+Por ende, según nuestro algoritmo, se peleará la batalla $j$ antes que la $k$, y en general, las batallas más importantes se pelearan antes.
 
-#### Misma relacion $b_{i}/t_{i}$ para toda batalla $i$
+#### Misma relación $b_{i}/t_{i}$ para toda batalla $i$
 
 Para el caso donde $b_{i}/t_{i} = k, k \in \mathbb{R}^{+}$, no importa como se ordene, pues tal como se demostro en la justificacion del algoritmo, al no tener inversiones, el coeficiente siempre sera el mismo. Además estamos ante el mejor caso posible, pues el ordenamiento deja al arreglo tal cual lo recibio, por lo que el algoritmo termina tardando  $\mathcal{O}(n)$.
 
