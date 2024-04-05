@@ -1,72 +1,61 @@
-import unittest, os
-from main import cargar_archivo, get_orden_optimo, calcular_coeficiente 
+import unittest
+from main import cargar_archivo, get_orden_optimo, calcular_coeficiente_de_impacto 
 
 class Test(unittest.TestCase):
     def test_drive_10(self):
-        path_archivo = os.path.join(os.getcwd(), 'pruebas_drive/10.txt')
-        batallas = cargar_archivo(path_archivo)
+        batallas = cargar_archivo('pruebas_drive/10.txt')
         orden_optimo = get_orden_optimo(batallas)
-        self.assertEqual(calcular_coeficiente(orden_optimo), 309600)
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 309600)
 
     def test_drive_50(self):
-        path_archivo = os.path.join(os.getcwd(), 'pruebas_drive/50.txt')
-        batallas = cargar_archivo(path_archivo)
+        batallas = cargar_archivo('pruebas_drive/50.txt')
         orden_optimo = get_orden_optimo(batallas)                     
-        self.assertEqual(calcular_coeficiente(orden_optimo), 5218700)
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 5218700)
                
     def test_drive_100(self):
-        path_archivo = os.path.join(os.getcwd(), 'pruebas_drive/100.txt')
-        batallas = cargar_archivo(path_archivo)
+        batallas = cargar_archivo('pruebas_drive/100.txt')
         orden_optimo = get_orden_optimo(batallas)    
-        self.assertEqual(calcular_coeficiente(orden_optimo), 780025365)
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 780025365)
 
     def test_drive_1000(self):
-        path_archivo = os.path.join(os.getcwd(), 'pruebas_drive/1000.txt')
-        batallas = cargar_archivo(path_archivo)
+        batallas = cargar_archivo('pruebas_drive/1000.txt')
         orden_optimo = get_orden_optimo(batallas)
-        self.assertEqual(calcular_coeficiente(orden_optimo), 74329021942)
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 74329021942)
 
     def test_drive_5000(self):
-        path_archivo = os.path.join(os.getcwd(), 'pruebas_drive/5000.txt')
-        batallas = cargar_archivo(path_archivo)
+        batallas = cargar_archivo('pruebas_drive/5000.txt')
         orden_optimo = get_orden_optimo(batallas)        
-        self.assertEqual(calcular_coeficiente(orden_optimo), 1830026958236)
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 1830026958236)
 
     def test_drive_10000(self):
-        path_archivo = os.path.join(os.getcwd(), 'pruebas_drive/10000.txt')
-        batallas = cargar_archivo(path_archivo)
+        batallas = cargar_archivo('pruebas_drive/10000.txt')
         orden_optimo = get_orden_optimo(batallas)   
-        self.assertEqual(calcular_coeficiente(orden_optimo), 7245315862869)
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 7245315862869)
 
     def test_drive_100000(self):
-        path_archivo = os.path.join(os.getcwd(), 'pruebas_drive/100000.txt')
-        batallas = cargar_archivo(path_archivo)
+        batallas = cargar_archivo('pruebas_drive/100000.txt')
         orden_optimo = get_orden_optimo(batallas)  
-        self.assertEqual(calcular_coeficiente(orden_optimo), 728684685661017)
-
-    def test_mismo_tiempo(self):
-        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Mismo tiempo.txt')
-        batallas = cargar_archivo(path_archivo)
-        orden_optimo = get_orden_optimo(batallas)  
-        self.assertEqual(calcular_coeficiente(orden_optimo), 165000)
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 728684685661017)
 
     def test_importancia_decimal1(self):
-        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Importancia decimal1.txt')
-        batallas = cargar_archivo(path_archivo)
+        batallas = cargar_archivo('ejemplos/Importancia decimal1.txt')
         orden_optimo = get_orden_optimo(batallas)  
-        self.assertEqual(calcular_coeficiente(orden_optimo), 128.89000000000001)
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 128.89000000000001)
 
     def test_importancia_decimal2(self):
-        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Importancia decimal2.txt')
-        batallas = cargar_archivo(path_archivo)
+        batallas = cargar_archivo('ejemplos/Importancia decimal2.txt')
         orden_optimo = get_orden_optimo(batallas)  
-        self.assertEqual(calcular_coeficiente(orden_optimo), 8390.910000000002)
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 8390.910000000002)
         
-    def test_numeros_muy_grandes(self):
-        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Numeros muy grandes.txt')
-        batallas = cargar_archivo(path_archivo)
+    def test_mismo_tiempo(self):
+        batallas = cargar_archivo('ejemplos/Mismo tiempo.txt')
         orden_optimo = get_orden_optimo(batallas)  
-        self.assertEqual(calcular_coeficiente(orden_optimo), 1.6435902372095263e+20)
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 165000)
+
+    def test_numeros_muy_grandes(self):
+        batallas = cargar_archivo('ejemplos/Numeros muy grandes.txt')
+        orden_optimo = get_orden_optimo(batallas)  
+        self.assertEqual(calcular_coeficiente_de_impacto(orden_optimo), 1.6435902372095263e+20)
 
        
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ def cargar_archivo(archivo):
 def get_orden_optimo(batallas):
     return sorted(batallas, reverse=True, key=lambda batalla: batalla[IMPORTANCIA]/batalla[TIEMPO])
 
-def calcular_coeficiente(batallas):
+def calcular_coeficiente_de_impacto(batallas):
     felicidad = 0
     suma = 0
     for batalla in batallas:
@@ -24,7 +24,7 @@ def main():
     batallas = cargar_archivo(sys.argv[1])
     orden_optimo = get_orden_optimo(batallas)
     print("Orden optimo:", orden_optimo)
-    print("Coeficiente:", calcular_coeficiente(orden_optimo))
+    print("Coeficiente de impacto:", calcular_coeficiente_de_impacto(orden_optimo))
 
 if __name__ == "__main__":
     main()

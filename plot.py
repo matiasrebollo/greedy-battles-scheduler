@@ -1,6 +1,6 @@
 from time import perf_counter
 from random import uniform
-from main import get_orden_optimo, calcular_coeficiente
+from main import get_orden_optimo, calcular_coeficiente_de_impacto
 import matplotlib.pyplot as plt
 
 tamanos_datos = [x for x in range(10, 50000, 500)]
@@ -10,7 +10,7 @@ for n in tamanos_datos:
     batallas = [(uniform(1, 1000), uniform(0, 1000)) for _ in range(n)]
     start = perf_counter()
     solucion = get_orden_optimo(batallas)
-    calcular_coeficiente(solucion)
+    calcular_coeficiente_de_impacto(solucion)
     fin = perf_counter()
     tiempo_ms = (fin - start)*1000
     tiempos_ejecucion.append(tiempo_ms)
