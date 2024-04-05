@@ -61,6 +61,12 @@ class Test(unittest.TestCase):
         batallas = cargar_archivo(path_archivo)
         orden_optimo = get_orden_optimo(batallas)  
         self.assertEqual(calcular_coeficiente(orden_optimo), 8390.910000000002)
+        
+    def test_numeros_muy_grandes(self):
+        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Numeros muy grandes.txt')
+        batallas = cargar_archivo(path_archivo)
+        orden_optimo = get_orden_optimo(batallas)  
+        self.assertEqual(calcular_coeficiente(orden_optimo), 1.6435902372095263e+20)
 
        
 if __name__ == '__main__':
