@@ -191,4 +191,16 @@ Además, no es necesario ordenar las batallas, por lo que estamos ante el mejor 
 
 # Mediciones
 
-![Gráfico complejidad](img/grafico_complejidad.png "Gráfico complejidad")
+Se realizaron una serie de mediciones para visualizar la complejidad de nuestro algoritmo
+
+Para la primer medición se fueron generando muestras aleatorias de tamaño n, con n yendo de 10 a 50000 elementos, añadiendo 500 elementos con cada iteración, y se les fue tomando el tiempo a cada muestra.
+
+![grafico complejidad](img/grafico_complejidad.png "grafico complejidad")
+
+Si bien es dificil de observar, se puede notar que el grafico no tiene una tendencia lineal, en especial al probar con muestras muy grandes.
+
+Para el siguiente grafico se repitio la experiencia anterior para los casos mencionados en el [analisis de variabilidad](#análisis-variabilidad-de-valores).
+
+![grafico variabilidad](img/grafico_variabilidad.png "grafico variabilidad")
+
+Como se puede ver en el grafico, la complejidad del algoritmo no tiene ningun cambio notable al tratar casos donde se mantiene constante una variable del problema, sin embargo podemos notar a simple vista la mejora en los tiempos de nuestro algoritmo al tratar casos donde no hay inversiones, apreciando una tendencia lineal.
