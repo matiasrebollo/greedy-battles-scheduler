@@ -4,15 +4,15 @@ El objetivo del presente trabajo es idear un algoritmo para el Señor del Fuego 
 
 ## Análisis del Problema
 
-Se nos pide ordenar un total de $n$ batallas, donde cada batalla $B_{i}$ consta de dos atributos:
+Se nos pide ordenar un total de $n$ batallas, donde cada batalla $i$ consta de dos atributos:
 - $b_{i}$ : la importancia de la batalla, es un numero real no negativo.
 - $t_{i}$ : el tiempo necesario para ganar la batalla, un real positivo.
 
-Además, se define la felicidad producida por la victoria ${j}$ como $F_{j} = F_{i} + t_{j}$ , donde $F_{i}$ corresponde a la batalla anterior ($F_{j} = t_{j}$ para la primera batalla).
+Además, se define la felicidad producida por la victoria $j$ como $F_{j} = F_{i} + t_{j}$ , donde $F_{i}$ corresponde a la batalla anterior ($F_{j} = t_{j}$ para la primera batalla).
 Se define como el orden óptimo de batallas a aquel orden tal que minimiza la siguiente suma:
 
 $$
- \sum_{i=1}^{n}b_{i}\cdot F_{i}
+\sum_{i=1}^{n}b_{i}\cdot F_{i}
 $$
 
 Podemos desarrollar esta suma para observar como afecta la magnitud de $b_{i}$ y $t_{i}$:
@@ -40,18 +40,18 @@ Si bien esto nos da un indicio de hacia donde debemos encarar el problema, no es
 Luego, proponemos el siguiente algoritmo:
 
 1. Ordenamos las batallas de mayor a menor según la relación $b_{i}/t_{i}$. Este será el orden óptimo en el que se deberán llevar a cabo las batallas.
-2. Calculamos el *coeficiente de impacto*, para eso iteramos sobre las batallas y aplicamos una *regla sencilla*:  por cada batalla calcularemos el termino $b_{i}\cdot F_{i}$, y los iremos acumulando hasta terminar la iteración.
+2. Calculamos el *coeficiente de impacto*, para eso iteramos sobre las batallas y aplicamos una *regla sencilla*:  por cada batalla calcularemos el termino $b_{i}\cdot F_{i}$, y los iremos acumulando hasta terminar la iteración. Esta será la parte greedy del algoritmo.
 
-### Demostración mediante inversiones
+### Demostración de la optimalidad mediante inversiones
 
 Sea $a_{i} = b_{i}/t_{i}$. Consideremos la solucion A obtenida mediante nuestro algoritmo, diremos que una solucion A' tiene una *inversion*, si hay un par de batallas $i$ y $j$ tal que $i$ se realiza antes que $j$, pero $a_{i} < a_{j}$. Por su funcionamiento, el A producido por nuestro algoritmo no tiene inversiones.
 Luego, para demostrar que nuestro algoritmo es óptimo, debemos demostrar lo siguiente:
 1. Dos soluciones distintas sin inversiones tienen el mismo coeficiente de impacto.
 2. Existe una solucion óptima sin inversiones.
 
-#### *Dos soluciones distintas sin inversiones tienen el mismo coeficiente de impacto.*
+#### *Dos soluciones distintas sin inversiones tienen el mismo coeficiente de impacto*
 
-Si dos soluciones ofrecen un orden de batalla distinto, y no tienen inversiones, entonces solo puede diferir el orden en el que se realizan batallas de igual $a$.
+Si dos soluciones ofrecen un orden de batalla distinto, y no tienen inversiones, entonces solo puede diferir el orden en el que se realizan batallas de igual $a$. Sean S y S' dos soluciones que difieren por el orden de un elemento (el elemento $i$ precede a $j$ en S, pero invierten su orden en S'), y que no tienen inversiones. A continuacion calculamos la diferencia entre el coeficiente de impacto de ambas soluciones (aclaración, llamaremos $k$ a la batalla peleada justo antes de $i$ y $j$):
 
 $$
 S = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{i}\cdot F_{i} + b_{j}\cdot F_{j} + \cdots = \cdots + b_{i}\left(F_{k} + t_{i}\right) + b_{j}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{j}\cdot F_{k} + b_{j}\cdot t_{i} + b_{j}\cdot t_{j} + \cdots
@@ -65,38 +65,32 @@ $$
 S - S' = b_{j}t_{i} - b_{i}t_{j}
 $$
 
-Como S y S' no tienen inversiones, $a = b_{i}/t_{i} = b_{j}/t_{j}$. Además reemplazamos $b_{i}$ por $t_{i}a$ y $b_{j}$ por $t_{j}a$. Volvemos a escribir la diferencia:
+Como S y S' no tienen inversiones solo difieren elementos de igual $a_{i}, entonces definimos $a = b_{i}/t_{i} = b_{j}/t_{j}$. Además reemplazamos $b_{i}$ por $t_{i}a$ y $b_{j}$ por $t_{j}a$. Volvemos a escribir la diferencia:
 
 $$
-S - S' = t_{j}at_{i} - t_{i}at_{j} = 0 \rightarrow S = S'
+S - S' = t_{j}at_{i} - t_{i}at_{j} = 0 \implies S = S'
 $$
+
+Por lo tanto sus coeficientes de impacto son iguales.
 
 #### *Existe una solución óptima sin inversiones*
 
-Consideremos la solucion $O$. Diremos que $O$ tiene al menos una inversión, ergo existe un par de batallas consecutivas $i$ y $j$ tal que $i$ precede a $j$ pero $a_{i} < a_{j}$. Si invertimos el orden de $i$ y $j$, obtenemos una nueva solución con una inversión menos. Luego debemos demostrar que esta nueva solución tiene un coeficiente de impacto no mayor al coeficiente de impacto de $O$.
+Consideremos la solucion $O$. Diremos que $O$ tiene al menos una inversión, ergo existe un par de batallas consecutivas $i$ y $j$ tal que $i$ precede a $j$ pero $a_{i} < a_{j}$. Si invertimos el orden de $i$ y $j$, obtenemos una nueva solución con una inversión menos, la cual llamaremos $O'$. Luego debemos demostrar que esta nueva solución tiene un coeficiente de impacto no mayor al coeficiente de impacto de $O$. 
 
-El desarrollo de la diferencia se realiza de manera similar al item anterior
-
-$$
-S = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{i}\cdot F_{i} + b_{j}\cdot F_{j} + \cdots = \cdots + b_{i}\left(F_{k} + t_{i}\right) + b_{j}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{j}\cdot F_{k} + b_{j}\cdot t_{i} + b_{j}\cdot t_{j} + \cdots
-$$
+Desarrollamos la diferencia entre los coeficientes de impacto de $O$ y $O'$ de la misma manera que el [item anterior](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto), llegando al siguiente resultado.
 
 $$
-S' = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{j}\cdot f_{j} + b_{i}\cdot f_{i} + \cdots = \cdots + b_{j}\left(F_{k} + t_{j}\right) + b_{i}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{j}\cdot F_{k} + b_{j}\cdot t_{j} + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{i}\cdot t_{j} + \cdots
-$$
-
-$$
-S - S' = b_{j}t_{i} - b_{i}t_{j}
+O - O' = b_{j}t_{i} - b_{i}t_{j}
 $$
 
 Reemplazamos $b_{i}$ por $t_{i}a_{i}$ y $b_{j}$ por $t_{j}a_{j}$. Luego:
 
 $$
-S - S' = t_{j}a_{j}t_{i} - t_{i}a_{i}t_{j}
+O - O' = t_{j}a_{j}t_{i} - t_{i}a_{i}t_{j}
 $$
 
 $$
-a_{j} > a_{i} \rightarrow t_{j}a_{j} > a_{i}t_{j} \rightarrow t_{j}a_{j}t_{i} > t_{i}a_{i}t_{j} \rightarrow S - S' > 0 \rightarrow S > S'
+a_{j} > a_{i} \implies t_{j}a_{j} > a_{i}t_{j} \implies t_{j}a_{j}t_{i} > t_{i}a_{i}t_{j} \implies S - S' > 0 \implies S > S'
 $$
 
 Por lo tanto, el intercambio no aumentó el coeficiente de impacto.
