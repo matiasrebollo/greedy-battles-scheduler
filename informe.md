@@ -185,7 +185,7 @@ Al igual que el caso anterior, el ordenamiento se sigue llevando a cabo, por lo 
 
 #### Misma relacion $b_{i}/t_{i}$ para toda batalla $i$
 
-Este se trata del que caso en el que todas las soluciones posibles *no tienen inversiones*, y tal como se demostro en la [sección](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto) correspondiente, el coeficiente de impacto será el mismo para cualquier orden, ergo nuestro algoritmo encontrará el óptimo.
+Este se trata del que caso en el que todas las soluciones posibles *no tienen inversiones*, y tal como se demostro en la [sección correspondiente](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto), el coeficiente de impacto será el mismo para cualquier orden, ergo nuestro algoritmo encontrará el óptimo.
 
 Además, no es necesario ordenar las batallas, por lo que estamos ante el mejor caso de nuestro algoritmo, y debido a la manera en la que se implementa el algoritmo de ordenamiento de Python, la complejidad del ordenamiento se ve reducida a $\mathcal{O}(n)$. Luego, la nueva complejidad queda $\mathcal{O}(n) + \mathcal{O}(n) = \mathcal{O}(n)$ en función de los datos de entrada.
 
