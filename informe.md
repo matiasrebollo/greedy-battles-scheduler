@@ -136,41 +136,58 @@ Por lo tanto, la complejidad total resulta en $\mathcal{O}(n\log{}n) + \mathcal{
 
 ## Análisis variabilidad de valores
 
-#### Manteniendo $b_{i}$ constante
+En esta sección analizaremos cómo afectan la variabilidad de $b_{i}$ y $t_{i}$ al funcionamiento de nuestro algoritmo. Para ello se propuso analizar los casos cuando las batallas tienen la misma duración, cuando poseen igual importancia, y cuando la relacion batalla-importancia es la misma para toda batalla.
 
-Si $b_{i} = b\space \forall i \in batallas$, podemos escribir la relación $b_{i}/t_{i}$ de la siguiente manera:
+#### Batallas de igual importancia
+
+$b_{i} = b\space \forall i \in batallas$
 
 $$
-\frac{b_{i}}{t_{i}} = \frac{b}{t_{i}}
+\sum_{i=1}^{n}b\cdot F_{i} = b\sum_{i=1}^{n}F_{i} = b\left(t_{1} + (t_{1} + t_{2}) + \cdots + \sum_{i=1}^{n}t_{i}\right) = b\left(n\cdot t_1{} + (n-1)\cdot t_{2} + \cdots + t_{n}\right)
 $$
 
-Sean $j$ y $k$ dos batallas tal que $t_{j} < t_{k}$("la batalla $j$ es más corta que la batalla $k$"), entonces se observa lo siguiente:
+Se puede observar que el tiempo que más veces aparece en la suma es el de la primera batalla, por lo tanto el orden óptimo es aquel donde las batallas más cortas se luchan antes.
+
+Podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera: $\frac{b_{i}}{t_{i}} = \frac{b}{t_{i}}$
+
+Sean $j$ y $k$ dos batallas tal que $t_{j} < t_{k}$("la batalla $j$ es mas corta que la batalla $k$"), entonces se observa lo siguiente:
 
 $$
 t_{j} < t_{k} \implies \frac{1}{t_{j}} > \frac{1}{t_{k}} \implies \frac{b}{t_{j}} > \frac{b}{t_{k}}
 $$
 
-Luego, al ordenar según nuestro criterio, la batalla $j$ irá antes que la batalla $k$, y en general, tal como se había observado en la seccion anterior, las batallas más cortas se pelearán antes.
+Luego, al ordenar segun nuestro criterio, la batalla $j$ irá antes que la batalla $k$, y en general, tal como se habia observado, las batallas mas cortas se pelearan antes y entonces nuestro algoritmo conserva su optimalidad.
 
-#### Manteniendo $t_{i}$ constante
+Este caso no afecta a la complejidad de nuestro algoritmo, pues el ordenamiento debe realizarse para obtener el óptimo.
 
-Si $t_{i} = t\space \forall i \in batallas$, podemos escribir la relación $b_{i}/t_{i}$ de la siguiente manera:
+#### Batallas de igual duración
+$$
+t_{i} = t\space \forall i \in batallas,\space F_{j} = \sum_{i=1}^{j}t_{i} \implies F_{j} = \sum_{i=1}^{j}t = j\cdot t
+$$
 
 $$
-\frac{b_{i}}{t_{i}} = \frac{b_{i}}{t}
+\sum_{i=1}^{n}b_{i}\cdot F_{i} = b_{1}\cdot F_{1} + b_{2} \cdot F_{2} + \cdots + b_{n} \cdot F_{n} = b_{1} \cdot t + b_{2}\cdot (2t)+ \cdots + b_{n}\cdot (nt) = (b_{1} + 2b_{2} + \cdots + nb_{n})\cdot t
 $$
 
-Sean $j$ y $k$ dos batallas tal que $b_{j} > b_{k}$ ("la batalla $j$ es más importante que la batalla $k$"), entonces se observa lo siguiente:
+Se puede ver que el $b_{i}$ con más apariciones en la suma es el $b_{n}$, por lo que buscamos que este sea el más chico. Por lo tanto la solución óptima implica luchar las batallas más importantes primero.
+
+Podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera: $\frac{b_{i}}{t_{i}} = \frac{b_{i}}{t}$
+
+Sean $j$ y $k$ dos batallas tal que $b_{j} > b_{k}$("la batalla $j$ es mas importante que la batalla $k$"), entonces se observa lo siguiente:
 
 $$
 b_{j} > b_{k} \implies \frac{b_{j}}{t} > \frac{b_{k}}{t}
 $$
 
-Por ende, según nuestro algoritmo, se peleará la batalla $j$ antes que la $k$, y en general, las batallas más importantes se pelearan antes.
+Por ende, segun nuestro algoritmo, se peleará la batalla $j$ antes que la $k$, y en general,las batallas más importantes se pelearan antes, lo cual concuerda con lo planteado anteriormente y por ende nuestra solución sigue siendo óptima.
 
-#### Misma relación $b_{i}/t_{i}$ para toda batalla $i$
+Al igual que el caso anterior, el ordenamiento se sigue llevando a cabo, por lo que la complejidad de nuestro algoritmo no varía.
 
-Para el caso donde $b_{i}/t_{i} = k, k \in \mathbb{R}^{+}$, no importa como se ordene, pues tal como se demostro en la justificacion del algoritmo, al no tener inversiones, el coeficiente siempre sera el mismo. Además estamos ante el mejor caso posible, pues el ordenamiento deja al arreglo tal cual lo recibio, por lo que el algoritmo termina tardando  $\mathcal{O}(n)$.
+#### Misma relacion $b_{i}/t_{i}$ para toda batalla $i$
+
+Este se trata del que caso en el que todas las soluciones posibles *no tienen inversiones*, y tal como se demostro en la [seccion](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto) correspondiente, el coeficiente de impacto será el mismo para cualquier orden, ergo nuestro algoritmo encontrará el óptimo.
+
+Además, no es necesario ordenar las batallas, por lo que estamos ante el mejor caso de nuestro algoritmo, y debido a la manera en la que se implementa el algoritmo de ordenamiento de python, la complejidad del ordenamiento se ve reducida a $\mathcal{O}(n)$. Luego, la nueva complejidad queda $\mathcal{O}(n) + \mathcal{O}(n) = \mathcal{O}(n)$ en funcion de los datos de entrada.
 
 # Mediciones
 
