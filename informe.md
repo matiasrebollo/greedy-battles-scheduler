@@ -99,22 +99,22 @@ $$
 a_{j} > a_{i} \rightarrow t_{j}a_{j} > a_{i}t_{j} \rightarrow t_{j}a_{j}t_{i} > t_{i}a_{i}t_{j} \rightarrow S - S' > 0 \rightarrow S > S'
 $$
 
-Por lo tanto, el intercambio no aumento el coeficiente de impacto.
+Por lo tanto, el intercambio no aumentó el coeficiente de impacto.
 
 Finalmente, queda demostrado que la solución A producida por nuestro algoritmo produce un coeficiente de impacto óptimo.
 
 # Algoritmo y Complejidad
-A continuación expondremos el código de nuestro algoritmo junto con el respectivo análisis de complejidad. Además, analizaremos cómo afecta la variabilidad de los atributos $b_{i}$ y $t_{i}$ a la ejecución del algoritmo planteado.
+A continuación expondremos el código de nuestro algoritmo junto con el respectivo análisis de complejidad.
 
 ## Implementación
 
 ```python
-def ordenarBatallas(batallas):
+# Código en main.py
+
+def get_orden_optimo(batallas):
     return sorted(batallas, reverse=True, key=lambda batalla: batalla[IMPORTANCIA]/batalla[TIEMPO])
 
-
 def calcular_coeficiente(batallas):
-    ordenarBatallas(batallas)
     felicidad = 0
     suma = 0
     for batalla in batallas:
@@ -123,10 +123,72 @@ def calcular_coeficiente(batallas):
     return suma
 ```
 
-## Analisis Complejidad
-El algoritmo consta de dos partes:
+## Análisis Complejidad
+
+Inicialmente se lleva acabo un preprocesamiento que consta de cargar el dataset (archivo .txt) en una lista de tuplas, lo cual se realiza en tiempo lineal $\mathcal{O}(n)$.
+
+Luego, el algoritmo en sí consta de dos partes:
 
 1. Se ordenan las batallas con el criterio planteado. Considerando el uso del sort de Python, esto se hace en $\mathcal{O}(n\log{}n)$.
 2. Se iteran las batallas y se realiza la suma ponderada descrita en el problema, tardando $\mathcal{O}(n)$.
 
-Luego, la complejidad total queda $\mathcal{O}(n\log{}n) + \mathcal{O}(n) = \mathcal{O}(n\log{}n)$.
+Por lo tanto, la complejidad total resulta en $\mathcal{O}(n\log{}n) + \mathcal{O}(n) = \mathcal{O}(n\log{}n)$.
+
+# Análisis variabilidad de valores
+
+En esta sección analizaremos cómo afectan la variabilidad de $b_{i}$ y $t_{i}$ al funcionamiento de nuestro algoritmo. Para ello se propuso analizar los casos cuando las batallas tienen la misma duración, cuando poseen igual importancia, y cuando la relacion batalla-importancia es la misma para toda batalla.
+
+#### Batallas de igual importancia
+
+$b_{i} = b\space \forall i \in batallas$
+
+$$
+\sum_{i=1}^{n}b\cdot F_{i} = b\sum_{i=1}^{n}F_{i} = b\left(t_{1} + (t_{1} + t_{2}) + \cdots + \sum_{i=1}^{n}t_{i}\right) = b\left(n\cdot t_1{} + (n-1)\cdot t_{2} + \cdots + t_{n}\right)
+$$
+
+Se puede observar que el tiempo que más veces aparece en la suma es el de la primera batalla, por lo tanto el orden óptimo es aquel donde las batallas más cortas se luchan antes.
+
+Podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera: $\frac{b_{i}}{t_{i}} = \frac{b}{t_{i}}$
+
+Sean $j$ y $k$ dos batallas tal que $t_{j} < t_{k}$("la batalla $j$ es mas corta que la batalla $k$"), entonces se observa lo siguiente:
+
+$$
+t_{j} < t_{k} \implies \frac{1}{t_{j}} > \frac{1}{t_{k}} \implies \frac{b}{t_{j}} > \frac{b}{t_{k}}
+$$
+
+Luego, al ordenar segun nuestro criterio, la batalla $j$ irá antes que la batalla $k$, y en general, tal como se habia observado, las batallas mas cortas se pelearan antes y entonces nuestro algoritmo conserva su optimalidad.
+
+Este caso no afecta a la complejidad de nuestro algoritmo, pues el ordenamiento debe realizarse para obtener el óptimo.
+
+#### Batallas de igual duración
+$$
+t_{i} = t\space \forall i \in batallas,\space F_{j} = \sum_{i=1}^{j}t_{i} \implies F_{j} = \sum_{i=1}^{j}t = j\cdot t
+$$
+
+$$
+\sum_{i=1}^{n}b_{i}\cdot F_{i} = b_{1}\cdot F_{1} + b_{2} \cdot F_{2} + \cdots + b_{n} \cdot F_{n} = b_{1} \cdot t + b_{2}\cdot (2t)+ \cdots + b_{n}\cdot (nt) = (b_{1} + 2b_{2} + \cdots + nb_{n})\cdot t
+$$
+
+Se puede ver que el $b_{i}$ con más apariciones en la suma es el $b_{n}$, por lo que buscamos que este sea el más chico. Por lo tanto la solución óptima implica luchar las batallas más importantes primero.
+
+Podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera: $\frac{b_{i}}{t_{i}} = \frac{b_{i}}{t}$
+
+Sean $j$ y $k$ dos batallas tal que $b_{j} > b_{k}$("la batalla $j$ es mas importante que la batalla $k$"), entonces se observa lo siguiente:
+
+$$
+b_{j} > b_{k} \implies \frac{b_{j}}{t} > \frac{b_{k}}{t}
+$$
+
+Por ende, segun nuestro algoritmo, se peleará la batalla $j$ antes que la $k$, y en general,las batallas más importantes se pelearan antes, lo cual concuerda con lo planteado anteriormente y por ende nuestra solución sigue siendo óptima.
+
+Al igual que el caso anterior, el ordenamiento se sigue llevando a cabo, por lo que la complejidad de nuestro algoritmo no varía.
+
+#### Misma relacion $b_{i}/t_{i}$ para toda batalla $i$
+
+Este se trata del que caso en el que todas las soluciones posibles *no tienen inversiones*, y tal como se demostro en la [seccion](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto) correspondiente, el coeficiente de impacto será el mismo para cualquier orden, ergo nuestro algoritmo encontrará el óptimo.
+
+Además, no es necesario ordenar las batallas, por lo que estamos ante el mejor caso de nuestro algoritmo, y debido a la manera en la que se implementa el algoritmo de ordenamiento de python, la complejidad del ordenamiento se ve reducida a $\mathcal{O}(n)$. Luego, la nueva complejidad queda $\mathcal{O}(n) + \mathcal{O}(n) = \mathcal{O}(n)$ en funcion de los datos de entrada.
+
+# Mediciones
+
+![grafico complejidad](img/grafico_complejidad.png "Grafico complejidad")

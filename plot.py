@@ -54,13 +54,9 @@ for n in tamanos_datos:
     tiempo_ms = (fin - start)*1000
     tiempos_relacion_cte.append(tiempo_ms)
 
-plt.title("Tiempo de ejecucion en funcion al tamaño del arreglo")
+plt.title("Tiempo de ejecucion en fincion al tamaño del arreglo")
 plt.xlabel("tamaño del arreglo")
 plt.ylabel("tiempo consumido(en ms)")
-plt.plot(tamanos_datos, tiempos_importancia_cte, color='red', label='importancia cte')
-plt.plot(tamanos_datos, tiempos_duracion_cte, color='orange', label='duracion cte')
-plt.plot(tamanos_datos, tiempos_relacion_cte, color='purple', label='relacion cte')
-plt.plot(tamanos_datos, tiempos_peor)
-plt.savefig("grafico variabilidad.png")
-plt.legend()
+plt.plot(tamanos_datos, tiempos_ejecucion)
+plt.savefig("grafico complejidad.png")
 plt.show()

@@ -44,6 +44,30 @@ class Test(unittest.TestCase):
         orden_optimo = get_orden_optimo(batallas)  
         self.assertEqual(calcular_coeficiente(orden_optimo), 728684685661017)
 
+    def test_mismo_tiempo(self):
+        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Mismo tiempo.txt')
+        batallas = cargar_archivo(path_archivo)
+        orden_optimo = get_orden_optimo(batallas)  
+        self.assertEqual(calcular_coeficiente(orden_optimo), 165000)
+
+    def test_importancia_decimal1(self):
+        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Importancia decimal1.txt')
+        batallas = cargar_archivo(path_archivo)
+        orden_optimo = get_orden_optimo(batallas)  
+        self.assertEqual(calcular_coeficiente(orden_optimo), 128.89000000000001)
+
+    def test_importancia_decimal2(self):
+        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Importancia decimal2.txt')
+        batallas = cargar_archivo(path_archivo)
+        orden_optimo = get_orden_optimo(batallas)  
+        self.assertEqual(calcular_coeficiente(orden_optimo), 8390.910000000002)
+        
+    def test_numeros_muy_grandes(self):
+        path_archivo = os.path.join(os.getcwd(), 'ejemplos/Numeros muy grandes.txt')
+        batallas = cargar_archivo(path_archivo)
+        orden_optimo = get_orden_optimo(batallas)  
+        self.assertEqual(calcular_coeficiente(orden_optimo), 1.6435902372095263e+20)
+
        
 if __name__ == '__main__':
     unittest.main()
