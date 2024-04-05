@@ -104,7 +104,7 @@ Por lo tanto, el intercambio no aumentó el coeficiente de impacto.
 Finalmente, queda demostrado que la solución A producida por nuestro algoritmo produce un coeficiente de impacto óptimo.
 
 # Algoritmo y Complejidad
-A continuación expondremos el código de nuestro algoritmo junto con el respectivo análisis de complejidad. Además, analizaremos cómo afecta la variabilidad de los atributos $b_{i}$ y $t_{i}$ a la ejecución del algoritmo planteado. Tambien se analizara como afecta la variabilidad de los valores de $b_{i}$ y $t_{i}$ a nuestro algoritmo.
+A continuación expondremos el código de nuestro algoritmo junto con el respectivo análisis de complejidad.
 
 ## Implementación
 
@@ -134,7 +134,7 @@ Luego, el algoritmo en sí consta de dos partes:
 
 Por lo tanto, la complejidad total resulta en $\mathcal{O}(n\log{}n) + \mathcal{O}(n) = \mathcal{O}(n\log{}n)$.
 
-## Análisis variabilidad de valores
+# Análisis variabilidad de valores
 
 En esta sección analizaremos cómo afectan la variabilidad de $b_{i}$ y $t_{i}$ al funcionamiento de nuestro algoritmo. Para ello se propuso analizar los casos cuando las batallas tienen la misma duración, cuando poseen igual importancia, y cuando la relacion batalla-importancia es la misma para toda batalla.
 
