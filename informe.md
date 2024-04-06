@@ -42,7 +42,7 @@ Luego, proponemos el siguiente algoritmo:
 1. Ordenamos las batallas de mayor a menor según la relación $b_{i}/t_{i}$. Este será el orden óptimo en el que se deberán llevar a cabo las batallas.
 2. Calculamos el *coeficiente de impacto*, para eso iteramos sobre las batallas y aplicamos una *regla sencilla*:  por cada batalla calcularemos el termino $b_{i}\cdot F_{i}$, y los iremos acumulando hasta terminar la iteración. Esta será la parte greedy del algoritmo.
 
-### Demostración de la optimalidad mediante inversiones
+### Demostración mediante inversiones
 
 Sea $a_{i} = b_{i}/t_{i}$. Consideremos la solucion A obtenida mediante nuestro algoritmo, diremos que una solucion A' tiene una *inversion*, si hay un par de batallas $i$ y $j$ tal que $i$ se realiza antes que $j$, pero $a_{i} < a_{j}$. Por su funcionamiento, el A producido por nuestro algoritmo no tiene inversiones.
 Luego, para demostrar que nuestro algoritmo es óptimo, debemos demostrar lo siguiente:
@@ -90,7 +90,7 @@ O - O' = t_{j}a_{j}t_{i} - t_{i}a_{i}t_{j}
 $$
 
 $$
-a_{j} > a_{i} \implies t_{j}a_{j} > a_{i}t_{j} \implies t_{j}a_{j}t_{i} > t_{i}a_{i}t_{j} \implies S - S' > 0 \implies S > S'
+a_{j} > a_{i} \implies t_{j}a_{j} > a_{i}t_{j} \implies t_{j}a_{j}t_{i} > t_{i}a_{i}t_{j} \implies O - O' > 0 \implies O > O'
 $$
 
 Por lo tanto, el intercambio no aumentó el coeficiente de impacto.
