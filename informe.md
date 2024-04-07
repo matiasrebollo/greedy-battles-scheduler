@@ -2,27 +2,27 @@
 
 El objetivo del presente trabajo es idear un algoritmo para el Señor del Fuego que logre determinar el orden óptimo en el que debe llevar a cabo un conjunto de batallas. Dicho algoritmo debe implementarse de forma Greedy. Además, se brindará un análisis completo del problema y del algoritmo en cuestión.
 
-## Análisis del Problema
+## Análisis del problema
 
 Se nos pide ordenar un total de $n$ batallas, donde cada batalla $i$ consta de dos atributos:
-- $b_{i}$ : la importancia de la batalla, es un numero real no negativo.
+- $b_{i}$ : la importancia de la batalla, es un número real no negativo.
 - $t_{i}$ : el tiempo necesario para ganar la batalla, un real positivo.
 
-Además, se define la felicidad producida por la victoria $j$ como $F_{j} = F_{i} + t_{j}$ , donde $F_{i}$ corresponde a la batalla anterior ($F_{j} = t_{j}$ para la primera batalla).
-Se define como el orden óptimo de batallas a aquel orden tal que minimiza la siguiente suma:
+Además, se define la felicidad producida por la victoria $j$ como $F_{j} = F_{i} + t_{j}$, donde $F_{i}$ corresponde a la batalla anterior ($F_{j} = t_{j}$ para la primera batalla).
+Se define como el orden óptimo de batallas a aquel orden tal que minimiza la siguiente sumatoria:
 
 $$
 \sum_{i=1}^{n}b_{i}\cdot F_{i}
 $$
 
-Podemos desarrollar esta suma para observar como afecta la magnitud de $b_{i}$ y $t_{i}$:
+Podemos desarrollar esta sumatoria para observar cómo afectan las magnitudes de $b_{i}$ y $t_{i}$:
 
 $$
 \sum_{i=1}^{n}b_{i}\cdot F_{i} = b_{1}\cdot F_{1} + b_{2} \cdot F_{2} + b_{3} \cdot F_{3} + ... + b_{n} \cdot F_{n} \newline
 =b_{1} \cdot t_{1} + b_{2}\cdot \left(t_{1} + t_{2}\right) + b_{3}\cdot \left(t_{1} + t_{2} + t_{3}\right) + \cdots + b_{n} \cdot \sum_{i=1}^{n}t_{i}
 $$
 
-En este punto se puede ver que el término que acompaña a cada $b_{i}$ va *creciendo*, siendo $b_{n}$ (i.e. la importancia de la última batalla), el término mas afectado. 
+En este punto se puede ver que el término que acompaña a cada $b_{i}$ va *creciendo*, siendo $b_{n}$ (i.e. la importancia de la última batalla), el término más afectado. 
 Ahora, sigamos desarrollando la suma, en esta ocasión distribuyendo $b_{i}$:
 
 $$
@@ -30,28 +30,30 @@ $$
 = t_{1}\sum_{i=1}^{n}b_{i} + t_{2}\sum_{i=2}^{n}b_{i} + t_{3}\sum_{i=3}^{n}b_{i} + \cdots + t_{n}\cdot b_{n}
 $$
 
-En este caso notamos que los términos que acompañan a cada $t_{i}$ van *disminuyendo*, por ende el $t_{i}$ más afectado será el $t_{1}$ (i.e. el tiempo necesario de la primer batalla). 
+En este caso notamos que los términos que acompañan a cada $t_{i}$ van *disminuyendo*, por ende el $t_{i}$ más afectado será el $t_{1}$ (i.e. el tiempo de la primer batalla). 
 
 Luego, llegamos a dos conclusiones:
-- Si obviamos la importancia de las batallas, estas se deben ordenar en forma ascendiente según el tiempo de duración ("las más cortas primero"). 
-- Si obviamos la duración de las batallas, debemos ordenarlas de manera descendiente según la importancia ("las más importantes primero").
+- Si obviamos la importancia de las batallas, éstas se deben ordenar en forma ascendiente según el tiempo de duración (*las más cortas primero*). 
+- Si obviamos la duración de las batallas, debemos ordenarlas de manera descendiente según la importancia (*las más importantes primero*).
 
-Si bien esto nos da un indicio de hacia donde debemos encarar el problema, no es suficiente, pues no podemos simplemente ignorar una parte entera del mismo. Entonces, deberíamos buscar una forma que cumpla esta relación lo mejor posible.
-Luego, proponemos el siguiente algoritmo:
+Si bien esto nos da un indicio de hacia donde debemos encarar el problema, no es suficiente, pues no podemos simplemente ignorar una parte entera del mismo. Entonces, debemos buscar una forma que cumpla esta relación lo mejor posible.
+Entonces, proponemos el siguiente algoritmo:
 
 1. Ordenamos las batallas de mayor a menor según la relación $b_{i}/t_{i}$. Este será el orden óptimo en el que se deberán llevar a cabo las batallas.
-2. Calculamos el *coeficiente de impacto*, para eso iteramos sobre las batallas y aplicamos una *regla sencilla*:  por cada batalla calcularemos el termino $b_{i}\cdot F_{i}$, y los iremos acumulando hasta terminar la iteración. Esta será la parte greedy del algoritmo.
+2. Calculamos el *coeficiente de impacto*, para eso iteramos sobre las batallas y aplicamos una *regla sencilla*:  por cada batalla calculamos el término $b_{i}\cdot F_{i}$, y los vamos acumulando hasta terminar la iteración. Esta será la parte greedy del algoritmo.
 
 ### Demostración mediante inversiones
 
-Sea $a_{i} = b_{i}/t_{i}$. Consideremos la solucion A obtenida mediante nuestro algoritmo, diremos que una solucion A' tiene una *inversion*, si hay un par de batallas $i$ y $j$ tal que $i$ se realiza antes que $j$, pero $a_{i} < a_{j}$. Por su funcionamiento, el A producido por nuestro algoritmo no tiene inversiones.
-Luego, para demostrar que nuestro algoritmo es óptimo, debemos demostrar lo siguiente:
+Sea $a_{i} = b_{i}/t_{i}$. Considerando la solución A obtenida mediante nuestro algoritmo, diremos que una solución A' tiene una *inversión* si hay un par de batallas $i$ y $j$ tal que $i$ se realiza antes que $j$, pero $a_{i} < a_{j}$. Por su funcionamiento, el A producido por nuestro algoritmo no puede tener inversiones.
+Por lo tanto, para demostrar que nuestro algoritmo es óptimo, debemos demostrar lo siguiente:
 1. Dos soluciones distintas sin inversiones tienen el mismo coeficiente de impacto.
 2. Existe una solucion óptima sin inversiones.
 
 #### *Dos soluciones distintas sin inversiones tienen el mismo coeficiente de impacto*
 
-Si dos soluciones ofrecen un orden de batalla distinto, y no tienen inversiones, entonces solo puede diferir el orden en el que se realizan batallas de igual $a$. Sean S y S' dos soluciones que difieren por el orden de un elemento (el elemento $i$ precede a $j$ en S, pero invierten su orden en S'), y que no tienen inversiones. A continuacion calculamos la diferencia entre el coeficiente de impacto de ambas soluciones (aclaración, llamaremos $k$ a la batalla peleada justo antes de $i$ y $j$):
+Si dos soluciones ofrecen un orden de batallas distinto y no tienen inversiones, entonces solo puede diferir el orden en el que se realizan batallas de igual $a_i$. Sean S y S' dos soluciones que difieren por el orden de un elemento (el elemento $i$ precede a $j$ en S, pero invierten su orden en S'), y que no tienen inversiones. A continuación se calcula la diferencia entre el coeficiente de impacto de ambas soluciones:
+
+Aclaración: llamaremos $k$ a la batalla peleada justo antes de $i$ y $j$.
 
 $$
 S = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{i}\cdot F_{i} + b_{j}\cdot F_{j} + \cdots = \cdots + b_{i}\left(F_{k} + t_{i}\right) + b_{j}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{j}\cdot F_{k} + b_{j}\cdot t_{i} + b_{j}\cdot t_{j} + \cdots
@@ -191,10 +193,10 @@ Para la primer medición se fueron generando muestras aleatorias de tamaño n, c
 
 ![grafico complejidad](img/grafico_complejidad.png "grafico complejidad")
 
-Si bien es dificil de observar, se puede notar que el grafico no tiene una tendencia lineal, en especial al probar con muestras muy grandes.
+Si bien es difícil de observar, se puede notar que el grafico no tiene una tendencia lineal, en especial al probar con muestras muy grandes.
 
-Para el siguiente grafico se repitio la experiencia anterior para los casos mencionados en el [analisis de variabilidad](#análisis-variabilidad-de-valores).
+Para el siguiente gráfico se repitio la experiencia anterior para los casos mencionados en el [análisis de variabilidad](#análisis-variabilidad-de-valores).
 
 ![grafico variabilidad](img/grafico_variabilidad.png "grafico variabilidad")
 
-Como se puede ver en el grafico, la complejidad del algoritmo no tiene ningun cambio notable al tratar casos donde se mantiene constante una variable del problema, sin embargo podemos notar a simple vista la mejora en los tiempos de nuestro algoritmo al tratar casos donde no hay inversiones, apreciando una tendencia lineal.
+Como se puede ver en el gráfico, la complejidad del algoritmo no tiene ningun cambio notable al tratar casos donde se mantiene constante una variable del problema, sin embargo podemos notar a simple vista la mejora en los tiempos de nuestro algoritmo al tratar casos donde no hay inversiones, apreciando una tendencia lineal.
