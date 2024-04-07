@@ -1,8 +1,26 @@
+<!-- omit in toc -->
+# Índice
+- [Objetivo](#objetivo)
+- [Análisis del problema](#análisis-del-problema)
+    - [Demostración mediante inversiones](#demostración-mediante-inversiones)
+      - [*Dos soluciones distintas sin inversiones tienen el mismo coeficiente de impacto*](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto)
+      - [*Existe una solución óptima sin inversiones*](#existe-una-solución-óptima-sin-inversiones)
+- [Algoritmo y complejidad](#algoritmo-y-complejidad)
+  - [Implementación](#implementación)
+  - [Análisis complejidad](#análisis-complejidad)
+- [Análisis variabilidad de valores](#análisis-variabilidad-de-valores)
+    - [Batallas de igual importancia](#batallas-de-igual-importancia)
+    - [Batallas de igual duración](#batallas-de-igual-duración)
+    - [Misma relación $b\_{i}/t\_{i}$ para toda batalla $i$](#misma-relación-b_it_i-para-toda-batalla-i)
+- [Casos de prueba](#casos-de-prueba)
+- [Mediciones](#mediciones)
+
+
 # Objetivo
 
 El objetivo del presente trabajo es idear un algoritmo para el Señor del Fuego que logre determinar el orden óptimo en el que debe llevar a cabo un conjunto de batallas. Dicho algoritmo debe implementarse de forma Greedy. Además, se brindará un análisis completo del problema y del algoritmo en cuestión.
 
-## Análisis del problema
+# Análisis del problema
 
 Se nos pide ordenar un total de $n$ batallas, donde cada batalla $i$ consta de dos atributos:
 - $b_{i}$ : la importancia de la batalla, es un número real no negativo.
@@ -77,7 +95,7 @@ Por lo tanto sus coeficientes de impacto son iguales.
 
 #### *Existe una solución óptima sin inversiones*
 
-Consideremos la solucion $O$. Diremos que $O$ tiene al menos una inversión, ergo existe un par de batallas consecutivas $i$ y $j$ tal que $i$ precede a $j$ pero $a_{i} < a_{j}$. Si invertimos el orden de $i$ y $j$, obtenemos una nueva solución con una inversión menos, la cual llamaremos $O'$. Luego debemos demostrar que esta nueva solución tiene un coeficiente de impacto no mayor al coeficiente de impacto de $O$. 
+Consideremos la solución $O$. Diremos que $O$ tiene al menos una inversión, ergo existe un par de batallas consecutivas $i$ y $j$ tal que $i$ precede a $j$ pero $a_{i} < a_{j}$. Si invertimos el orden de $i$ y $j$, obtenemos una nueva solución con una inversión menos, la cual llamaremos $O'$. Luego debemos demostrar que esta nueva solución tiene un coeficiente de impacto no mayor al coeficiente de impacto de $O$. 
 
 Desarrollamos la diferencia entre los coeficientes de impacto de $O$ y $O'$ de la misma manera que el [item anterior](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto), llegando al siguiente resultado.
 
@@ -99,7 +117,7 @@ Por lo tanto, el intercambio no aumentó el coeficiente de impacto.
 
 Finalmente, queda demostrado que la solución A producida por nuestro algoritmo produce un coeficiente de impacto óptimo.
 
-# Algoritmo y Complejidad
+# Algoritmo y complejidad
 A continuación expondremos el código de nuestro algoritmo junto con el respectivo análisis de complejidad.
 
 ## Implementación
@@ -119,7 +137,7 @@ def calcular_coeficiente_de_impacto(batallas):
     return suma
 ```
 
-## Análisis Complejidad
+## Análisis complejidad
 
 Inicialmente se lleva acabo un preprocesamiento que consta de cargar el dataset (archivo .txt) en una lista de tuplas, lo cual se realiza en tiempo lineal $\mathcal{O}(n)$.
 
@@ -134,7 +152,7 @@ Por lo tanto, la complejidad total resulta en $\mathcal{O}(n\log{}n) + \mathcal{
 
 En esta sección analizaremos cómo afectan la variabilidad de $b_{i}$ y $t_{i}$ al funcionamiento de nuestro algoritmo. Para ello se propuso analizar los casos cuando las batallas tienen la misma duración, cuando poseen igual importancia, y cuando la relacion batalla-importancia es la misma para toda batalla.
 
-#### Batallas de igual importancia
+### Batallas de igual importancia
 
 $b_{i} = b\space \forall i \in batallas$
 
@@ -156,7 +174,7 @@ Luego, al ordenar según nuestro criterio, la batalla $j$ irá antes que la bata
 
 Este caso no afecta a la complejidad de nuestro algoritmo, pues el ordenamiento debe realizarse para obtener el óptimo.
 
-#### Batallas de igual duración
+### Batallas de igual duración
 $$
 t_{i} = t\space \forall i \in batallas,\space F_{j} = \sum_{i=1}^{j}t_{i} \implies F_{j} = \sum_{i=1}^{j}t = j\cdot t
 $$
@@ -179,7 +197,7 @@ Por ende, segun nuestro algoritmo, se peleará la batalla $j$ antes que la $k$, 
 
 Al igual que el caso anterior, el ordenamiento se sigue llevando a cabo, por lo que la complejidad de nuestro algoritmo no varía.
 
-#### Misma relacion $b_{i}/t_{i}$ para toda batalla $i$
+### Misma relación $b_{i}/t_{i}$ para toda batalla $i$
 
 Este se trata del que caso en el que todas las soluciones posibles *no tienen inversiones*, y tal como se demostro en la [sección correspondiente](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto), el coeficiente de impacto será el mismo para cualquier orden, ergo nuestro algoritmo encontrará el óptimo.
 
@@ -189,7 +207,7 @@ Además, no es necesario ordenar las batallas, por lo que estamos ante el mejor 
 
 # Mediciones
 
-Se realizaron una serie de mediciones para visualizar la complejidad de nuestro algoritmo
+Se realizaron una serie de mediciones para visualizar la complejidad de nuestro algoritmo.
 
 Para la primer medición se fueron generando muestras aleatorias de tamaño n, con n yendo de 10 a 50000 elementos, añadiendo 500 elementos con cada iteración, y se les fue tomando el tiempo a cada muestra.
 
@@ -197,7 +215,7 @@ Para la primer medición se fueron generando muestras aleatorias de tamaño n, c
 
 Si bien es difícil de observar, se puede notar que el grafico no tiene una tendencia lineal, en especial al probar con muestras muy grandes.
 
-Para el siguiente gráfico se repitio la experiencia anterior para los casos mencionados en el [análisis de variabilidad](#análisis-variabilidad-de-valores).
+Para el siguiente gráfico se repitió la experiencia anterior para los casos mencionados en el [análisis de variabilidad](#análisis-variabilidad-de-valores).
 
 ![grafico variabilidad](img/grafico_variabilidad.png "grafico variabilidad")
 
