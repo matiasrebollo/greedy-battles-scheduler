@@ -211,6 +211,14 @@ Se prestó atención a la posible detección de fallos en el código con casos n
 
 Además de la validación de los casos, se agregó una comparación de los resultados del ordenamiento de nuestro algoritmo frente a otros ordenamientos menos eficientes para este problema.
 
+|                    |Nuestro Algoritmo       | Importancia mayor a menor | Tiempo menor a mayor  |
+|--------------------|------------------------|---------------------------|-----------------------|
+|Importancia decimal1| 128.89000000000001     | 128.89000000000001        | 128.89000000000001    |
+|Importancia decimal2| 8390.910000000002      | 10368.26                  | 12164.99              |
+|Mismo tiempo        | 165000                 | 165000                    | 252000                |
+|Numeros muy grandes | 1.6435902372095263e+20 | 1.6454821957261767e+20    | 1.7362205005103884e+20|
+
+
 # Mediciones
 
 Se realizaron una serie de mediciones para visualizar la complejidad de nuestro algoritmo.
