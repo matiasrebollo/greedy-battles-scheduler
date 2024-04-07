@@ -205,6 +205,12 @@ Además, no es necesario ordenar las batallas, por lo que estamos ante el mejor 
 
 # Casos de prueba
 
+Se realizaron algunos ejemplos de ejecución con el proposito de validar la eficacia y optimalidad de nuestra implementación del algoritmo. Ademas de los casos proporcionados por el curso, se agregaron adicionales para corroborar la cobertura. Los mismos se encuentran en la carpeta "ejemplos" del repositorio.
+
+Se prestó atención a la posible detección de fallos en el código con casos no contemplados inicialmente. Entre los ejemplos de ejecución se encuentran casos con: números decimales, números muy grandes, y batallas con misma duración. Se observó que nuestro algoritmo respondió satisfactoriamente a todos ellos.
+
+Además de la validación de los casos, se agregó una comparación de los resultados del ordenamiento de nuestro algoritmo frente a otros ordenamientos menos eficientes para este problema.
+
 # Mediciones
 
 Se realizaron una serie de mediciones para visualizar la complejidad de nuestro algoritmo.
