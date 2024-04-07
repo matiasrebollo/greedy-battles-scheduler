@@ -183,33 +183,33 @@ $$
 \sum_{i=1}^{n}b_{i}\cdot F_{i} = b_{1}\cdot F_{1} + b_{2} \cdot F_{2} + \cdots + b_{n} \cdot F_{n} = b_{1} \cdot t + b_{2}\cdot (2t)+ \cdots + b_{n}\cdot (nt) = (b_{1} + 2b_{2} + \cdots + nb_{n})\cdot t
 $$
 
-Se puede ver que el $b_{i}$ con más apariciones en la suma es el $b_{n}$, por lo que buscamos que este sea el más chico. Por lo tanto la solución óptima implica luchar las batallas más importantes primero.
+Se puede ver que el $b_{i}$ con más apariciones en la suma es el $b_{n}$, por lo que buscamos que este sea el más chico. Por lo tanto, la solución óptima implica realizar las batallas con mayor $b_{i}$ (las más importantes) primero.
 
-Podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera: $\frac{b_{i}}{t_{i}} = \frac{b_{i}}{t}$
+Es posible reescribir la relación $b_{i}/t_{i}$ de la siguiente manera: $\frac{b_{i}}{t_{i}} = \frac{b_{i}}{t}$
 
-Sean $j$ y $k$ dos batallas tal que $b_{j} > b_{k}$ ("la batalla $j$ es mas importante que la batalla $k$"), entonces se observa lo siguiente:
+Sean $j$ y $k$ dos batallas tal que $b_{j} > b_{k}$ ("la batalla $j$ es más importante que la batalla $k$"), entonces se observa lo siguiente:
 
 $$
 b_{j} > b_{k} \implies \frac{b_{j}}{t} > \frac{b_{k}}{t}
 $$
 
-Por ende, segun nuestro algoritmo, se peleará la batalla $j$ antes que la $k$, y en general,las batallas más importantes se pelearan antes, lo cual concuerda con lo planteado anteriormente y por ende nuestra solución sigue siendo óptima.
+Por ende, según nuestro algoritmo, se peleará la batalla $j$ antes que la $k$, y en general, las batallas más importantes se lucharán primero, lo cual concuerda con lo planteado anteriormente y por consiguiente nuestra solución sigue siendo óptima.
 
-Al igual que el caso anterior, el ordenamiento se sigue llevando a cabo, por lo que la complejidad de nuestro algoritmo no varía.
+Al igual que el caso anterior, el ordenamiento se sigue llevando a cabo de la misma manera, por lo que la complejidad de nuestro algoritmo no varía.
 
 ### Misma relación $b_{i}/t_{i}$ para toda batalla $i$
 
-Este se trata del que caso en el que todas las soluciones posibles *no tienen inversiones*, y tal como se demostro en la [sección correspondiente](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto), el coeficiente de impacto será el mismo para cualquier orden, ergo nuestro algoritmo encontrará el óptimo.
+Se trata del caso en el que todas las soluciones posibles *no tienen inversiones* y tal como se demostró en la [sección correspondiente](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto), el coeficiente de impacto será el mismo para cualquier orden, ergo nuestro algoritmo encontrará el óptimo.
 
-Además, no es necesario ordenar las batallas, por lo que estamos ante el mejor caso de nuestro algoritmo, y debido a la manera en la que se implementa el algoritmo de ordenamiento de Python, la complejidad del ordenamiento se ve reducida a $\mathcal{O}(n)$. Luego, la nueva complejidad queda $\mathcal{O}(n) + \mathcal{O}(n) = \mathcal{O}(n)$ en función de los datos de entrada.
+Además, para este caso particular no es necesario ordenar las batallas, por lo que estamos ante el mejor caso de nuestro algoritmo, y debido a la manera en la que se implementa el algoritmo de ordenamiento de Python, la complejidad del ordenamiento se ve reducida a $\mathcal{O}(n)$. Por lo tanto, la nueva complejidad total queda $\mathcal{O}(n) + \mathcal{O}(n) + \mathcal{O}(n) = \mathcal{O}(n)$ en función de los datos de entrada.
 
 # Casos de prueba
 
-Se realizaron algunos ejemplos de ejecución con el proposito de validar la eficacia y optimalidad de nuestra implementación del algoritmo. Ademas de los casos proporcionados por el curso, se agregaron adicionales para corroborar la cobertura del mismo, estos se encuentran en la carpeta "ejemplos" del repositorio.
+Se realizaron algunos ejemplos de ejecución con el propósito de validar la eficacia y optimalidad de nuestra implementación del algoritmo. Además de los casos proporcionados por la cátedra, se agregaron ejemplos adicionales para corroborar la cobertura del mismo. Estos se encuentran dentro de la carpeta *ejemplos* del repositorio.
 
-Se prestó atención a la posible detección de fallos en el código con casos no contemplados inicialmente. Entre los ejemplos de ejecución se encuentran casos con: números decimales, números muy grandes, y batallas con misma duración. Se observó que nuestro algoritmo respondió satisfactoriamente a todos ellos.
+Se prestó especial atención a la posible detección de fallos en el código con casos no contemplados inicialmente. Entre los ejemplos de ejecución se encuentran casos con: números decimales, números muy grandes y batallas con misma duración. Se observó que nuestro algoritmo respondió satisfactoriamente a todos ellos.
 
-Además de la validación de los casos, se agregó una comparación de los resultados del ordenamiento de nuestro algoritmo frente a otros ordenamientos menos eficientes para este problema.
+Además de la validación de los casos, se agregó una comparación de los resultados del coeficiente de impacto con el ordenamiento de nuestro algoritmo frente a otros ordenamientos menos eficientes para este problema.
 
 |                    |Nuestro Algoritmo       | Importancia mayor a menor | Tiempo menor a mayor  |
 |--------------------|------------------------|---------------------------|-----------------------|
@@ -223,14 +223,14 @@ Además de la validación de los casos, se agregó una comparación de los resul
 
 Se realizaron una serie de mediciones para visualizar la complejidad de nuestro algoritmo.
 
-Para la primer medición se fueron generando muestras aleatorias de tamaño n, con n yendo de 10 a 50000 elementos, añadiendo 500 elementos con cada iteración, y se les fue tomando el tiempo a cada muestra.
+Para la primer medición se fueron generando muestras aleatorias de tamaño $n$, con $n$ yendo de 10 a 50000 elementos, añadiendo 500 elementos en cada iteración y tomando el tiempo de cada muestra.
 
-![grafico complejidad](img/grafico_complejidad.png "grafico complejidad")
+![Gráfico complejidad](img/grafico_complejidad.png "Gráfico complejidad")
 
-Si bien es difícil de observar, se puede notar que el grafico no tiene una tendencia lineal, en especial al probar con muestras muy grandes.
+Si bien es no es tan sencillo de notar, se puede observar que el gráfico no tiene una tendencia lineal, en especial al probar con muestras más grandes.
 
-Para el siguiente gráfico se repitió la experiencia anterior para los casos mencionados en el [análisis de variabilidad](#análisis-variabilidad-de-valores).
+Para el siguiente gráfico se repitió la experiencia anterior para los casos mencionados en el [análisis de variabilidad](#análisis-variabilidad-de-y).
 
-![grafico variabilidad](img/grafico_variabilidad.png "grafico variabilidad")
+![Gráfico variabilidad](img/grafico_variabilidad.png "Gráfico variabilidad")
 
-Como se puede ver en el gráfico, la complejidad del algoritmo no tiene ningun cambio notable al tratar casos donde se mantiene constante una variable del problema, sin embargo podemos notar a simple vista la mejora en los tiempos de nuestro algoritmo al tratar casos donde no hay inversiones, apreciando una tendencia lineal.
+Como se puede ver en este gráfico, la complejidad del algoritmo no tiene ningún cambio notable al tratar casos donde se mantiene constante una variable del problema. Sin embargo, se puede notar a simple vista la mejora en los tiempos del algoritmo al tratarse de casos en donde no hay inversiones, apreciando una tendencia lineal.
