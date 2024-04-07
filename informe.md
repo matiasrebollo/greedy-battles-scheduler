@@ -8,7 +8,7 @@
 - [Algoritmo y complejidad](#algoritmo-y-complejidad)
   - [Implementación](#implementación)
   - [Análisis complejidad](#análisis-complejidad)
-- [Análisis variabilidad de valores](#análisis-variabilidad-de-valores)
+- [Análisis variabilidad de $b\_{i}$ y $t\_{i}$](#análisis-variabilidad-de-b_i-y-t_i)
     - [Batallas de igual importancia](#batallas-de-igual-importancia)
     - [Batallas de igual duración](#batallas-de-igual-duración)
     - [Misma relación $b\_{i}/t\_{i}$ para toda batalla $i$](#misma-relación-b_it_i-para-toda-batalla-i)
@@ -69,41 +69,41 @@ Por lo tanto, para demostrar que nuestro algoritmo es óptimo, debemos demostrar
 
 #### *Dos soluciones distintas sin inversiones tienen el mismo coeficiente de impacto*
 
-Si dos soluciones ofrecen un orden de batallas distinto y no tienen inversiones, entonces solo puede diferir el orden en el que se realizan batallas de igual $a_i$. Sean S y S' dos soluciones que difieren por el orden de un elemento (el elemento $i$ precede a $j$ en S, pero invierten su orden en S'), y que no tienen inversiones. A continuación se calcula la diferencia entre el coeficiente de impacto de ambas soluciones:
+Si dos soluciones ofrecen un orden de batallas distinto y no tienen inversiones, entonces solo puede diferir el orden en el que se realizan batallas de igual $a_i$. Sean S y S' dos soluciones que difieren por el orden de un elemento (el elemento $i$ precede a $j$ en S, pero invierten su orden en S') y que no tienen inversiones. A continuación se calcula la diferencia entre los coeficientes de impacto de ambas soluciones:
 
-Aclaración: llamaremos $k$ a la batalla peleada justo antes de $i$ y $j$.
+Aclaración: llamaremos $k$ a la batalla realizada justo antes de $i$ y $j$.
 
 $$
 S = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{i}\cdot F_{i} + b_{j}\cdot F_{j} + \cdots = \cdots + b_{i}\left(F_{k} + t_{i}\right) + b_{j}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{j}\cdot F_{k} + b_{j}\cdot t_{i} + b_{j}\cdot t_{j} + \cdots
 $$
 
 $$
-S' = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{j}\cdot f_{j} + b_{i}\cdot f_{i} + \cdots = \cdots + b_{j}\left(F_{k} + t_{j}\right) + b_{i}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{j}\cdot F_{k} + b_{j}\cdot t_{j} + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{i}\cdot t_{j} + \cdots
+S' = \sum_{x=1}^{n}b_{x}\cdot F_{x} = \cdots + b_{j}\cdot F_{j} + b_{i}\cdot F_{i} + \cdots = \cdots + b_{j}\left(F_{k} + t_{j}\right) + b_{i}\left(F_{k} + t_{i} + t_{j}\right) + \cdots = \cdots + b_{j}\cdot F_{k} + b_{j}\cdot t_{j} + b_{i}\cdot F_{k} + b_{i}\cdot t_{i} + b_{i}\cdot t_{j} + \cdots
 $$
 
 $$
 S - S' = b_{j}t_{i} - b_{i}t_{j}
 $$
 
-Como S y S' no tienen inversiones solo difieren elementos de igual $a_{i}$, entonces definimos $a = b_{i}/t_{i} = b_{j}/t_{j}$. Además reemplazamos $b_{i}$ por $t_{i}a$ y $b_{j}$ por $t_{j}a$. Volvemos a escribir la diferencia:
+Como S y S' no tienen inversiones solo difieren elementos de igual $a_{i}$, entonces definimos $a = b_{i}/t_{i} = b_{j}/t_{j}$. Además, reemplazando $b_{i}=t_{i}a$ y $b_{j}=t_{j}a$. Reescribiendo la diferencia queda:
 
 $$
 S - S' = t_{j}at_{i} - t_{i}at_{j} = 0 \implies S = S'
 $$
 
-Por lo tanto sus coeficientes de impacto son iguales.
+Por lo tanto, sus coeficientes de impacto son iguales.
 
 #### *Existe una solución óptima sin inversiones*
 
-Consideremos la solución $O$. Diremos que $O$ tiene al menos una inversión, ergo existe un par de batallas consecutivas $i$ y $j$ tal que $i$ precede a $j$ pero $a_{i} < a_{j}$. Si invertimos el orden de $i$ y $j$, obtenemos una nueva solución con una inversión menos, la cual llamaremos $O'$. Luego debemos demostrar que esta nueva solución tiene un coeficiente de impacto no mayor al coeficiente de impacto de $O$. 
+Considerando la solución $O$, diremos que tiene al menos una inversión, ergo existe un par de batallas consecutivas $i$ y $j$ tal que $i$ precede a $j$ pero $a_{i} < a_{j}$. Si invertimos el orden de $i$ y $j$, obtenemos una nueva solución con una inversión menos, la cual llamaremos $O'$. Luego, debemos demostrar que esta nueva solución tiene un coeficiente de impacto no mayor al de $O$. 
 
-Desarrollamos la diferencia entre los coeficientes de impacto de $O$ y $O'$ de la misma manera que el [item anterior](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto), llegando al siguiente resultado.
+Desarrollando la diferencia entre los coeficientes de impacto de $O$ y $O'$ de la misma manera que el [ítem anterior](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto), se llega al siguiente resultado.
 
 $$
 O - O' = b_{j}t_{i} - b_{i}t_{j}
 $$
 
-Reemplazamos $b_{i}$ por $t_{i}a_{i}$ y $b_{j}$ por $t_{j}a_{j}$. Luego:
+Reemplazando $b_{i}=t_{i}a_{i}$ y $b_{j}=t_{j}a_{j}$ la ecuación queda:
 
 $$
 O - O' = t_{j}a_{j}t_{i} - t_{i}a_{i}t_{j}
@@ -113,7 +113,7 @@ $$
 a_{j} > a_{i} \implies t_{j}a_{j} > a_{i}t_{j} \implies t_{j}a_{j}t_{i} > t_{i}a_{i}t_{j} \implies O - O' > 0 \implies O > O'
 $$
 
-Por lo tanto, el intercambio no aumentó el coeficiente de impacto.
+Por lo tanto, la inversión no aumentó el coeficiente de impacto.
 
 Finalmente, queda demostrado que la solución A producida por nuestro algoritmo produce un coeficiente de impacto óptimo.
 
@@ -139,18 +139,18 @@ def calcular_coeficiente_de_impacto(batallas):
 
 ## Análisis complejidad
 
-Inicialmente se lleva acabo un preprocesamiento que consta de cargar el dataset (archivo .txt) en una lista de tuplas, lo cual se realiza en tiempo lineal $\mathcal{O}(n)$.
+Inicialmente se lleva a cabo un preprocesamiento que consta de cargar el dataset de batallas (archivo *.txt*) en una lista de tuplas, lo cual se realiza en tiempo lineal $\mathcal{O}(n)$.
 
 Luego, el algoritmo en sí consta de dos partes:
 
-1. Se ordenan las batallas con el criterio planteado. Considerando el uso del sort de Python, esto se hace en $\mathcal{O}(n\log{}n)$.
+1. Se ordenan las batallas con el criterio planteado. Considerando el uso del *sorted* de Python, esto se hace en $\mathcal{O}(n\log{}n)$.
 2. Se iteran las batallas y se realiza la suma ponderada descrita en el problema, tardando $\mathcal{O}(n)$.
 
-Por lo tanto, la complejidad total resulta en $\mathcal{O}(n\log{}n) + \mathcal{O}(n) = \mathcal{O}(n\log{}n)$.
+Por lo tanto, la complejidad total resulta en $\mathcal{O}(n) + \mathcal{O}(n\log{}n) + \mathcal{O}(n) = \mathcal{O}(n\log{}n)$.
 
-# Análisis variabilidad de valores
+# Análisis variabilidad de $b_{i}$ y $t_{i}$
 
-En esta sección analizaremos cómo afectan la variabilidad de $b_{i}$ y $t_{i}$ al funcionamiento de nuestro algoritmo. Para ello se propuso analizar los casos cuando las batallas tienen la misma duración, cuando poseen igual importancia, y cuando la relacion batalla-importancia es la misma para toda batalla.
+En esta sección analizaremos cómo afecta la variabilidad de los valores de $b_{i}$ y $t_{i}$ al funcionamiento de nuestro algoritmo. Para ello se propuso analizar los casos en donde las batallas tienen la misma duración, en donde tienen igual importancia, y cuando la relación $b_{i}/t_{i}$ es la misma para todas las batallas.
 
 ### Batallas de igual importancia
 
@@ -160,19 +160,19 @@ $$
 \sum_{i=1}^{n}b\cdot F_{i} = b\sum_{i=1}^{n}F_{i} = b\left(t_{1} + (t_{1} + t_{2}) + \cdots + \sum_{i=1}^{n}t_{i}\right) = b\left(n\cdot t_1{} + (n-1)\cdot t_{2} + \cdots + t_{n}\right)
 $$
 
-Se puede observar que el tiempo que más veces aparece en la suma es el de la primera batalla, por lo tanto el orden óptimo es aquel donde las batallas más cortas se luchan antes.
+Se puede observar que el tiempo que más veces aparece en la suma es el de la primera batalla, por lo tanto el orden óptimo es aquel en donde las batallas más cortas se realizan antes.
 
-Podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera: $\frac{b_{i}}{t_{i}} = \frac{b}{t_{i}}$
+Se puede reescribir la relación $b_{i}/t_{i}$ de la siguiente manera: $\frac{b_{i}}{t_{i}} = \frac{b}{t_{i}}$
 
-Sean $j$ y $k$ dos batallas tal que $t_{j} < t_{k}$("la batalla $j$ es mas corta que la batalla $k$"), entonces se observa lo siguiente:
+Sean $j$ y $k$ dos batallas tal que $t_{j} < t_{k}$ ("la batalla $j$ es más corta que la batalla $k$"), entonces se observa lo siguiente:
 
 $$
 t_{j} < t_{k} \implies \frac{1}{t_{j}} > \frac{1}{t_{k}} \implies \frac{b}{t_{j}} > \frac{b}{t_{k}}
 $$
 
-Luego, al ordenar según nuestro criterio, la batalla $j$ irá antes que la batalla $k$, y en general, tal como se había observado, las batallas más cortas se pelearán antes y entonces nuestro algoritmo conserva su optimalidad.
+Luego, al ordenar según nuestro criterio, la batalla $j$ irá antes que la batalla $k$ y en general, tal como se había observado, las batallas más cortas se pelearán antes y entonces nuestro algoritmo conserva su optimalidad.
 
-Este caso no afecta a la complejidad de nuestro algoritmo, pues el ordenamiento debe realizarse para obtener el óptimo.
+Este caso no afecta a la complejidad de nuestro algoritmo, pues el ordenamiento debe realizarse igualmente para obtener el orden óptimo.
 
 ### Batallas de igual duración
 $$
@@ -187,7 +187,7 @@ Se puede ver que el $b_{i}$ con más apariciones en la suma es el $b_{n}$, por l
 
 Podemos escribir la relacion $b_{i}/t_{i}$ de la siguiente manera: $\frac{b_{i}}{t_{i}} = \frac{b_{i}}{t}$
 
-Sean $j$ y $k$ dos batallas tal que $b_{j} > b_{k}$("la batalla $j$ es mas importante que la batalla $k$"), entonces se observa lo siguiente:
+Sean $j$ y $k$ dos batallas tal que $b_{j} > b_{k}$ ("la batalla $j$ es mas importante que la batalla $k$"), entonces se observa lo siguiente:
 
 $$
 b_{j} > b_{k} \implies \frac{b_{j}}{t} > \frac{b_{k}}{t}
