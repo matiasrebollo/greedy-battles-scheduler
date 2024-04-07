@@ -67,7 +67,7 @@ $$
 S - S' = b_{j}t_{i} - b_{i}t_{j}
 $$
 
-Como S y S' no tienen inversiones solo difieren elementos de igual $a_{i}, entonces definimos $a = b_{i}/t_{i} = b_{j}/t_{j}$. Además reemplazamos $b_{i}$ por $t_{i}a$ y $b_{j}$ por $t_{j}a$. Volvemos a escribir la diferencia:
+Como S y S' no tienen inversiones solo difieren elementos de igual $a_{i}$, entonces definimos $a = b_{i}/t_{i} = b_{j}/t_{j}$. Además reemplazamos $b_{i}$ por $t_{i}a$ y $b_{j}$ por $t_{j}a$. Volvemos a escribir la diferencia:
 
 $$
 S - S' = t_{j}at_{i} - t_{i}at_{j} = 0 \implies S = S'
@@ -184,6 +184,8 @@ Al igual que el caso anterior, el ordenamiento se sigue llevando a cabo, por lo 
 Este se trata del que caso en el que todas las soluciones posibles *no tienen inversiones*, y tal como se demostro en la [sección correspondiente](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto), el coeficiente de impacto será el mismo para cualquier orden, ergo nuestro algoritmo encontrará el óptimo.
 
 Además, no es necesario ordenar las batallas, por lo que estamos ante el mejor caso de nuestro algoritmo, y debido a la manera en la que se implementa el algoritmo de ordenamiento de Python, la complejidad del ordenamiento se ve reducida a $\mathcal{O}(n)$. Luego, la nueva complejidad queda $\mathcal{O}(n) + \mathcal{O}(n) = \mathcal{O}(n)$ en función de los datos de entrada.
+
+# Casos de prueba
 
 # Mediciones
 
