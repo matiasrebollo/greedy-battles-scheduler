@@ -14,6 +14,7 @@
     - [Misma relación $b\_{i}/t\_{i}$ para toda batalla $i$](#misma-relación-b_it_i-para-toda-batalla-i)
 - [Casos de prueba](#casos-de-prueba)
 - [Mediciones](#mediciones)
+- [Conclusiones](#conclusiones)
 
 
 # Objetivo
@@ -229,8 +230,11 @@ Para la primer medición se fueron generando muestras aleatorias de tamaño $n$,
 
 Si bien es no es tan sencillo de notar, se puede observar que el gráfico no tiene una tendencia lineal, en especial al probar con muestras más grandes.
 
-Para el siguiente gráfico se repitió la experiencia anterior para los casos mencionados en el [análisis de variabilidad](#análisis-variabilidad-de-y).
+Para el siguiente gráfico se repitió la experiencia anterior para los casos mencionados en el [análisis de variabilidad de $b_{i}$ y $t_{i}$](#análisis-variabilidad-de-y).
 
 ![Gráfico variabilidad](img/grafico_variabilidad.png "Gráfico variabilidad")
 
 Como se puede ver en este gráfico, la complejidad del algoritmo no tiene ningún cambio notable al tratar casos donde se mantiene constante una variable del problema. Sin embargo, se puede notar a simple vista la mejora en los tiempos del algoritmo al tratarse de casos en donde no hay inversiones, apreciando una tendencia lineal.
+
+
+# Conclusiones

@@ -8,11 +8,11 @@ tiempos_ejecucion = []
 
 for n in tamanos_datos:
     batallas = [(uniform(1, 1000), uniform(0, 1000)) for _ in range(n)]
-    start = perf_counter()
+    inicio = perf_counter()
     solucion = get_orden_optimo(batallas)
     calcular_coeficiente_de_impacto(solucion)
     fin = perf_counter()
-    tiempo_ms = (fin - start)*1000
+    tiempo_ms = (fin - inicio)*1000
     tiempos_ejecucion.append(tiempo_ms)
 
 plt.title("Tiempo de ejecución en función del tamaño del arreglo")
