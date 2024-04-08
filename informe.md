@@ -11,7 +11,7 @@
 - [Análisis variabilidad de $b\_{i}$ y $t\_{i}$](#análisis-variabilidad-de-b_i-y-t_i)
     - [Batallas de igual importancia](#batallas-de-igual-importancia)
     - [Batallas de igual duración](#batallas-de-igual-duración)
-    - [Misma relación $b\_{i}/t\_{i}$ para toda batalla $i$](#misma-relación-b_it_i-para-toda-batalla-i)
+    - [Misma relación $b\_{i}/t\_{i}$ en todas las batallas](#misma-relación-b_it_i-en-todas-las-batallas)
 - [Casos de prueba](#casos-de-prueba)
 - [Mediciones](#mediciones)
 - [Conclusiones](#conclusiones)
@@ -198,7 +198,7 @@ Por ende, según nuestro algoritmo, se peleará la batalla $j$ antes que la $k$,
 
 Al igual que el caso anterior, el ordenamiento se sigue llevando a cabo de la misma manera, por lo que la complejidad de nuestro algoritmo no varía.
 
-### Misma relación $b_{i}/t_{i}$ para toda batalla $i$
+### Misma relación $b_{i}/t_{i}$ en todas las batallas
 
 Se trata del caso en el que todas las soluciones posibles *no tienen inversiones* y tal como se demostró en la [sección correspondiente](#dos-soluciones-distintas-sin-inversiones-tienen-el-mismo-coeficiente-de-impacto), el coeficiente de impacto será el mismo para cualquier orden, ergo nuestro algoritmo encontrará el óptimo.
 
@@ -238,3 +238,8 @@ Como se puede ver en este gráfico, la complejidad del algoritmo no tiene ningú
 
 
 # Conclusiones
+
+Tras haber realizado todos los análisis, ejemplos y mediciones correspondientes, podemos concluir que:
+- El algoritmo propuesto obtiene siempre la solución óptima al problema en cuestión para todos los casos posibles. La variabilidad de los valores de $t_{i}$ y $b_{i}$ no afecta la optimalidad del mismo.
+- La complejidad del algoritmo en general es $\mathcal{O}(n\log{}n)$.
+- Existe un caso particular ([misma relación $b_{i}/t_{i}$ en todas las batallas](#misma-relación-en-todas-las-batallas)) en el cual se reduce la complejidad algorítmica a $\mathcal{O}(n)$.
