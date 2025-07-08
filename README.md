@@ -1,3 +1,9 @@
+# Ordenador de batallas - Algoritmo Greedy
+
+Este programa implementa un algoritmo greedy para determinar el orden óptimo de un conjunto de batallas, cada una con una importancia y una duración. El objetivo es maximizar una medida de felicidad acumulada, basada en el tiempo y la secuencia en que se resuelven.
+
+Trabajo práctico para la materia **Teoría de Algoritmos** (FIUBA).
+
 ## Ejecución
 
 Para ejecutar el programa, ingresar en una terminal:
